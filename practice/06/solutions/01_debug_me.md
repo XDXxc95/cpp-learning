@@ -6,7 +6,7 @@
 
 直接运行 `build/01_debug_me.exe`：
 
-```
+```text
 3 5 7 4
 ```
 

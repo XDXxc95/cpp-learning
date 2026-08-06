@@ -15,7 +15,7 @@
 
 ## 学习循环 | The Learning Loop
 
-```
+```text
 你: 发起对话 → Claude: 生成文档+示例+练习(编译验证通过)
     → 你: 在 practice/ 亲手写练习
     → 你: 回来说「写完了/卡住了」
@@ -68,7 +68,7 @@ tools\compile.bat examples\00-getting-started\hello.cpp  # cmd
 
 ### 工具链解析优先级
 
-```
+```text
 环境变量 MINGW_BIN  >  tools/toolchain.config  >  自动探测常见路径
 ```
 
@@ -82,7 +82,7 @@ tools\compile.bat examples\00-getting-started\hello.cpp  # cmd
 
 ## 目录结构 | Directory Layout
 
-```
+```text
 cpp-learning/
 ├── README.md              # 本文件
 ├── CLAUDE.md              # Claude 学习协议（自动加载，别删）
@@ -100,7 +100,7 @@ cpp-learning/
 ## 常用命令 | Useful Commands
 
 | 目的 | 命令 |
-|---|---|
+| --- | --- |
 | 编译+运行 | `tools/compile.sh 文件.cpp` / `tools\compile.bat 文件.cpp` |
 | 只编译不运行 | `tools/build.sh 文件.cpp` / `tools\build.bat 文件.cpp` |
 | gdb 调试 | `tools/gdb.sh 文件.cpp`（先编译含调试信息再进 gdb） |
@@ -112,7 +112,7 @@ cpp-learning/
 在 VS Code 中**打开一个 `.cpp` 文件**后（焦点在编辑器里）：
 
 | 快捷键 | 作用 |
-|---|---|
+| --- | --- |
 | **F5** | **调试**当前文件（launch.json，编辑器断点 + 变量/监视/调用栈面板，I/O 走独立控制台） |
 | Ctrl+Shift+B | 编译并运行当前文件（任务默认快捷键） |
 | Ctrl+Shift+P → Tasks: Run Task | 选「Compile only」只编译 / 「Debug (gdb)」终端调试 |
@@ -124,7 +124,7 @@ cpp-learning/
 
 在项目根目录启动 Claude，然后说：
 
-```
+```bash
 继续学习，下一个模块
 ```
 
