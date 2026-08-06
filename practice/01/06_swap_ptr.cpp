@@ -7,6 +7,9 @@ void swapPtr(int* a, int* b) {
   // TODO: 交换 *a 和 *b 的值
   // 需要：int temp = *a;  *a = *b;  *b = temp;
   // 思考：为什么是 *a（解引用）而不是 a 本身？a 里装的是地址。
+  int tmp = *a;
+  *a = *b;
+  *b = tmp;
 }
 
 int main() {
