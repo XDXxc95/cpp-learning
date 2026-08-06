@@ -7,6 +7,10 @@ tools/toolchain.config
 # VS Code 个人设置 personal settings
 .vscode/keybindings.json
 
+# VS Code 生成配置（机器相关路径，由 tools/setup.* 从 .template 生成，勿提交）
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+
 # 系统 / 临时
 *.exe
 *.o
