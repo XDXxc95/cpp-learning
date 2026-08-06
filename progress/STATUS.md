@@ -20,6 +20,7 @@
 - **M2 引用/指针/内存模型 —— 内容生成 ✅（2026-08-06，待用户练习）**：`docs/02-pointers-and-memory.md`、`examples/02/` 4 示例（编译 0 警告 + 运行验证）、`practice/02/exercises.md` + 4 个骨架 + `solutions/`（3 个 cpp 已编译验证，预测题答案核对一致）。
 - **M1 语法查漏补缺 ✅（2026-08-06 完成）** —— 6/6 练习全过 review、自评全熟练；顺带完成 M7 预习（sieve）。
 - M0 环境与工作流 ✅（工具链自适应：`tools/toolchain.config` + `tools/setup.*`，部署到新位置跑一次 setup）
+- **本机部署 ✅（2026-08-06）**：工具链 `D:\Dev_soft\mingw64\bin`（g++ 14.2.0 / gdb 14.2 / make 4.4.1，MinGW-Builds 独立发行版）→ setup 已生成 config + `.vscode` 配置，hello 编译运行验证通过；CLAUDE.md 工具链段已改为机制化描述（以 config 为准）
 - 环境修复（2026-08-06）：DLL 污染段错误、运行弹窗、自适应部署 —— 细节见 PROGRESS 日志
 - M6-1 gdb 入门内容生成 ✅（待练习）
 

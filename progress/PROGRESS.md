@@ -4,6 +4,15 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-06 · 部署到新机器（工具链自适应实战验证）
+
+- **需求**：用户「帮我将这个项目部署好」。
+- **做了什么**：检查依赖（Git 2.49 ✅；CLAUDE.md 里写的 `D:\XC_workspace\msys64\mingw64\bin` 等常见路径均不存在）→ 定位真实工具链 `D:\Dev_soft\mingw64\bin`（g++ **14.2.0** MinGW-Builds 独立发行版、gdb 14.2、make 4.4.1，3 个运行库 DLL 齐全）→ 用 `MINGW_BIN=D:/Dev_soft/mingw64/bin tools/setup.sh` 生成 `tools/toolchain.config` + 从模板生成 `.vscode/launch.json` / `c_cpp_properties.json` → `tools/compile.sh examples/00-getting-started/hello.cpp` 编译 0 警告，直接运行 `build/hello.exe` 输出 `Hello, World!`（退出码 0），3 个 DLL 自动同步进 `build/`。
+- **顺手修正**：CLAUDE.md 工具链段原写死 `D:\XC_workspace\msys64\mingw64\bin`（g++ 16.1.0 / gdb 17.2，本机不存在）→ 改为机制化描述（工具链以 `toolchain.config` 为准，附本机当前值）；DLL 污染段去掉过时的 PATH 组成断言；「GCC 16」→「GCC 14+」。符合项目「仓库不含本机绝对路径」原则。
+- **验证**：git 工作区仅 CLAUDE.md 与 progress 变更；`toolchain.config` / `.vscode` 生成物 / `build/` 均在 .gitignore 内，无本机路径泄漏进仓库。
+- **结论**：M0 自适应部署机制在真实新环境复测通过（含非 MSYS2 的独立 MinGW 发行版；普通自动探测候选不含 `D:\Dev_soft`，靠 config/环境变量机制解决）。
+- **下一步建议**：学习状态不变——继续 M2 练习 1-4，完成后回来 review。
+
 ### 2026-08-06 · M2 引用/指针/内存模型 —— 内容生成（待练习）
 
 - **需求**：M1 全 ✅ 后按规则进入 M2。用户确认「继续」。
