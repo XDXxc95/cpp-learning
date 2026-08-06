@@ -1,0 +1,9 @@
+{
+  // C++ 代码风格：自动补全/格式化遵循 LLVM（2 空格、大括号同行）
+  // 根目录已有 .clang-format，此设置为兜底 fallback
+  "C_Cpp.clang_format_fallbackStyle": "LLVM",
+  // 输入时自动格式化（分号/大括号后），让自动补全的代码即时落到 LLVM 风格
+  "editor.formatOnType": true,
+  // 保存时不强制格式化，避免把已有代码批量重排
+  "editor.formatOnSave": false
+}

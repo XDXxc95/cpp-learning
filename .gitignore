@@ -1,0 +1,16 @@
+# 编译产物 compiled artifacts（含自动同步的运行库 DLL）
+build/
+
+# 工具链配置（机器相关，由 tools/setup.* 生成；脚本会回退到自动探测）
+tools/toolchain.config
+
+# VS Code 个人设置 personal settings
+.vscode/keybindings.json
+
+# 系统 / 临时
+*.exe
+*.o
+*.obj
+*.log
+.DS_Store
+Thumbs.db

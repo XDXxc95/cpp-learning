@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile & Run current C++ file",
+      "detail": "编译并运行当前打开的 .cpp（快捷键 F5）",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\tools\\compile.bat",
+        "${file}"
+      ],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+    },
+    {
+      "label": "Debug current C++ file (gdb)",
+      "detail": "编译后用 gdb 调试当前打开的 .cpp（终端交互式）",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\tools\\gdb.bat",
+        "${file}"
+      ],
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Compile current C++ file (no run)",
+      "detail": "只编译不运行（调试器的 preLaunchTask 用）。reveal:never = 不抢终端焦点，避免打断同终端的 Claude Code",
+      "type": "process",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "${workspaceFolder}\\tools\\build.bat",
+        "${file}"
+      ],
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "never", "focus": false, "panel": "shared", "clear": true }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(g++*:*)",
+      "Bash(gcc*:*)",
+      "Bash(tools/compile*:*)",
+      "Bash(tools/gdb*:*)",
+      "Bash(build/*:*)",
+      "Bash(mingw32-make*:*)",
+      "Bash(mkdir*:*)",
+      "Bash(rm -rf build:*)"
+    ]
+  }
+}

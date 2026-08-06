@@ -1,0 +1,3 @@
+# 代码风格 Code style: LLVM
+# 让 VS Code 的 C/C++ 自动补全与格式化遵循 LLVM 规范（2 空格缩进、大括号同行、80 列）
+BasedOnStyle: LLVM

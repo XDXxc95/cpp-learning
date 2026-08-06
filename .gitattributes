@@ -1,0 +1,6 @@
+# 行尾规则 line endings
+# .sh 必须 LF：CRLF 会让 bash 报 "command not found"
+*.sh text eol=lf
+# .bat 用 CRLF（cmd 原生，LF 也能跑但保持传统）
+*.bat text eol=crlf
+# 其余文本默认由 core.autocrlf 处理

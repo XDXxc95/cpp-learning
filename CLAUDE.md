@@ -1,0 +1,99 @@
+# CLAUDE.md — C++ 学习推进协议
+
+> 本文件是**本项目的学习引擎**，每次在此目录启动 `claude` 时自动加载。
+> 它是约束你（Claude）在每次学习会话中如何行动的规则。先读它，再行动。
+
+## ⚡ 会话启动协议（每次会话第一步，必须执行）
+
+1. **先读 `progress/STATUS.md`** —— 当前进度快照：进行到哪个模块、下一步做什么。
+2. 需要全局路线时再读 `ROADMAP.md`；需要历史细节时读 `progress/PROGRESS.md`。
+3. **向用户复述当前进度**，确认从哪继续（除非用户已明确指定任务）。
+4. 会话结束前**必须回写**：更新 `progress/STATUS.md` + 在 `progress/PROGRESS.md` 追加一条日志 + 同步 `ROADMAP.md` 状态。三处一致才算回写完成。
+
+## 项目定位
+
+这是一个由 **Claude Code 驱动的 C++ 学习项目**。学习内容（文档 / 示例 / 练习题目）不是一次性写完的，而是**在每次用户发起的 Claude 会话中，按本协议逐步生成**，进度实时回写。用户通过「发起对话 → 生成内容 → 自己练习 → 回来 review → 推进下一模块」的循环学习。
+
+## 用户画像（勿偏离）
+
+- **水平**：学过 C++ 基础——懂变量/循环/函数/基本类语法，但**未系统深入** STL、内存管理、现代 C++ 特性。不要从 Hello World 逐字讲起，但也不要假设对方懂移动语义。
+- **目标**：① 通用软件开发 / 求职 ② 算法 / 刷题（LeetCode 类）。
+- **节奏**：不固定、随缘。模块必须**自包含**，可随时暂停续接；每次会话先按顶部「会话启动协议」读 `progress/STATUS.md` 恢复上下文。
+- **文档语言**：**中英对照**（关键概念中英都写，代码/术语保留英文）。
+
+## 学习推进循环（每次会话的骨架）
+
+用户会以下面任一方式开启会话：
+- 「继续学习，下一个模块」/「开始模块 X」
+- 「我写完练习了，帮我 review」
+- 「我卡在练习 X 了，帮我看看」
+- 「根据我的情况调整一下路线」
+
+你的行动序列：
+
+1. **读上下文**：读 `ROADMAP.md`（路线+状态）与 `progress/PROGRESS.md`（日志），确认当前进度与用户画像。
+2. **生成模块内容**（生成新模块时）：写入 `docs/NN-*.md`、`examples/NN/` 示例、`practice/NN/exercises.md`（练习题目）+ `practice/NN/solutions/`（参考答案）。
+3. **编译验证**：所有 `examples/` 示例必须先用 `tools/compile.sh <file>` 或 `tools/compile.bat <file>` 编译并运行成功，**确认无警告无错误后才交付给用户**。若示例里有依赖具体输入才能展示的代码，确保默认路径可直接运行。
+4. **给用户本次学习指引**：简述本节目标、核心概念、示例清单、练习清单，说明「先自己写，再看参考答案」。
+5. **等用户完成练习**。当用户回来 review 时：读用户的练习代码 → 编译运行 → 给出针对性的反馈（正确的地方、可改进处、是否达标）→ 更新进度。
+6. **回写进度**：更新 `ROADMAP.md` 模块状态 + 在 `progress/PROGRESS.md` 追加一条会话日志（日期、做了什么、结论、下一步建议）。
+
+## 绝对原则
+
+- **练习答案由用户自己写**。Claude 只提供练习题目和参考答案（放在 `solutions/`）。**不要**替用户写 `practice/NN/` 下的练习文件；用户明确要求「直接给我答案」除外，但先提醒练习的意义。
+- **示例必须先能编译运行**。交付前用 `tools/compile.*` 验证过；运行失败或带警告的示例不允许交付。
+- **进度必须回写**。完成一次学习 review 后，不更新 ROADMAP/PROGRESS 就结束会话 = 违规。
+- **路线可实时调整**。用户要求改路线时，直接修改 `ROADMAP.md`（增删模块、调顺序、加重点、拆细/精简），不要口头建议完就完事。
+
+## 文档生成规范
+
+- 路径：`docs/NN-短横线主题.md`，与 `examples/NN/`、`practice/NN/` 编号一致。
+- **中英对照**：核心概念用「中文 / English」或「概念（English）」形式；代码、关键字、类型名保留英文。
+- 结构模板（可用 markdown）：
+
+  ```markdown
+  # MNN · 主题 | English Title
+  > 目标 Goals ｜ 预计时间 Est. time ｜ 难度 Difficulty
+
+  ## 本节要点 Key Points
+  ## 正文 Body
+  ## 代码示例 Examples → 指向 examples/NN/
+  ## 易错点 Common Pitfalls
+  ## 练习 Exercises → 指向 practice/NN/exercises.md
+  ## 自测 Self-Check（答案给出或指向 solutions）
+  ```
+
+- 每节控制体量：一次会话一模块，宁可薄而精，不要一次铺完。
+
+## 编译环境与约束（必须遵守）
+
+- 编译器：`tools/toolchain.config` 的 `MINGW_BIN` 指向（当前机器为 `D:\XC_workspace\msys64\mingw64\bin`，g++ **16.1.0**，MSYS2 **MINGW64**，独立于 Qt）。⚠️ 用 MINGW64 而非 UCRT64：本机被精简过、缺少 UCRT 的 `api-ms-win-crt-*.dll`，UCRT64 版 cc1plus 无法运行。旧 Qt 自带 g++ 7.3 仍在 `C:\Qt\Qt5.12.12\Tools\mingw730_64\bin`，**不要再用**。
+- 调试器：`tools/toolchain.config` 的 `MINGW_BIN` 定位 `gdb.exe`（当前机器 GDB **17.2**）。另有 `mingw32-make.exe`（GNU Make 4.4.1）。
+- **路径自适应（关键，2026-08）**：所有 `tools/*.sh` / `*.bat` 从**脚本自身位置**定位项目根（`BASH_SOURCE` / `%~dp0`），不依赖调用时的当前目录；工具链解析顺序为「环境变量 `MINGW_BIN` → `tools/toolchain.config` → 自动探测常见路径」。部署到新位置/新机器后跑一次 `tools/setup.bat`（或 `setup.sh`）：探测工具链 → 重写 `toolchain.config` → 从 `.vscode/*.template` 重新生成 `launch.json` / `c_cpp_properties.json`。**约定**：`.bat` 文件必须保持**纯 ASCII**（cmd 按 ANSI 代码页解析，UTF-8 中文会破坏命令解析）；`.sh` 是 UTF-8 原生不受限。需要改路径一律改 `toolchain.config`，不要手改散落的硬编码。
+- ⚠️ **DLL 污染与项目级运行时（关键，2026-08 修复）**：本机 `MSYS2 mingw64\bin` **不在**系统 PATH；系统 PATH 里反而有 Git / Qt 的旧 mingw 目录（`C:\Program Files\Git\mingw64\bin`、`C:\Qt\Qt5.12.12\Tools\mingw730_64\bin` 等）。若 exe 在错误 PATH 下解析到这些**旧版 `libstdc++-6.dll`**，用 MSYS2 g++16 编译的程序在**调试器下首次 `std::cout` 会段错误**（独立运行可能正常）。因此 `tools/compile.*` / `build.*` / `gdb.*` 每次编译都会把 MSYS2 的 3 个运行库（`libstdc++-6.dll`、`libgcc_s_seh-1.dll`、`libwinpthread-1.dll`）同步进 `build/`——Windows 按「exe 所在目录优先于 PATH」解析 DLL，exe 身边的正确版本绕开一切 PATH 污染。**不要删除 `build/` 里的这 3 个 DLL**；脚本会在下次编译时自动补回。另：Git Bash 里给 Windows 进程加 PATH 必须用 MSYS 路径 `/d/...`，`D:/...` 正斜杠形式在 Windows DLL 搜索里不生效。
+- 标准：项目默认 `-std=c++17 -Wall -Wextra -g`（已封装进 `tools/compile.*`，直接用脚本，不要手敲原始命令）。GCC 16 完整支持 C++20/23，需要时经用户确认可升级默认标准。
+- ✅ `<filesystem>`（`std::filesystem`）**可用**（GCC 8+ 才有，现在已满足）。之前的禁用限制已解除。
+- 可用特性：C++11/14/17 全部；C++20 的概念 / ranges / coroutines 也可用，但**默认示例仍按 C++17 风格写**（与路线图一致），除非用户要求示范新特性。
+- 库注意：MinGW 下 `-lstdc++` 默认链接，不需要显式。第三方库一律不引入（避免路径地狱）。
+- 编码：源码文件统一 UTF-8；Windows 控制台中文可能乱码，示例输出优先用英文或 ASCII，确需中文时用 `std::setlocale` 并在注释里说明。
+
+## 目录职责速查
+
+| 路径 | 谁写 | 作用 |
+| --- | --- | --- |
+| `docs/` | Claude | 学习文档（每模块一篇） |
+| `examples/` | Claude | 可编译运行的示例代码 |
+| `practice/NN/` | **用户** | 用户练习代码（Claude 不代写） |
+| `practice/NN/exercises.md` | Claude | 练习题目 |
+| `practice/NN/solutions/` | Claude | 参考答案（对照用） |
+| `tools/` | Claude | 编译/调试脚本 |
+| `progress/PROGRESS.md` | Claude | 会话日志 |
+| `ROADMAP.md` | Claude | 路线图 + 状态总表 |
+| `README.md` | Claude | 项目入口 |
+
+## 常用命令
+
+- 编译并运行：`tools/compile.sh <文件.cpp>`（Git Bash）或 `tools\compile.bat <文件.cpp>`（cmd）。**程序在独立弹窗里运行**（`start ... cmd /c ... & pause`，显示输出与退出码，按任意键后窗口自动关闭），不占用当前终端——这是为了让终端里的 Claude Code CLI 不被运行输出顶走。
+- 编译后进 gdb：`tools/gdb.sh <文件.cpp>`
+- 调试：VS Code F5 → cppdbg，`launch.json` 已设 `externalConsole: true`，程序 I/O 走独立控制台窗口；预编译任务 `reveal: never` 不抢焦点。调试器仍会弹出「调试控制台」面板（gdb 消息），属 VS Code 固有行为。
+- 编译产物在 `build/`，随时可删（运行库 DLL 会被脚本自动补回）。
