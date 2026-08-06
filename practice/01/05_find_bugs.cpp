@@ -7,10 +7,13 @@
 #include <iostream>
 
 int main() {
-  for (int i = 1; i <= 10; ++i) { 
+  int count = 0;
+  for (int i = 1; i <= 10; ++i) {
     std::cout << i * i << " ";
-    if (i % 5 == 0)
+    count++;
+    if (count % 5 == 0)
       std::cout << "\n";
   }
+  std::cout << std::endl;
   return 0;
 }
