@@ -1,0 +1,12 @@
+// markdownlint 项目配置 | Project config (VS Code markdownlint 扩展自动读取)
+// 约定来源：2026-08 docs/02 曾被 MD060/MD040 报错，规则现已显式化。
+// 新写/修改 .md 时遵循这里，Claude 生成文档也应照此。
+
+{
+  // 表格分隔行：padded 风格 —— `| --- | --- |`
+  // （不是紧凑的 `|---|---|`；管道两侧都要有空格）
+  "MD060": { "style": "padded" },
+
+  // fenced 代码块必须带语言标签（cpp / bash / text），默认开启，显式声明防覆盖
+  "MD040": true
+}
