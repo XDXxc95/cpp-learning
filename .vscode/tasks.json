@@ -13,7 +13,7 @@
       ],
       "group": { "kind": "build", "isDefault": true },
       "problemMatcher": ["$gcc"],
-      "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true, "echo": false, "showReuseMessage": false }
     },
     {
       "label": "Debug current C++ file (gdb)",
@@ -26,7 +26,7 @@
         "${file}"
       ],
       "problemMatcher": ["$gcc"],
-      "presentation": { "reveal": "always", "panel": "shared" }
+      "presentation": { "reveal": "always", "panel": "shared", "echo": false, "showReuseMessage": false }
     },
     {
       "label": "Compile current C++ file (no run)",
@@ -39,7 +39,7 @@
         "${file}"
       ],
       "problemMatcher": ["$gcc"],
-      "presentation": { "reveal": "never", "focus": false, "panel": "shared", "clear": true }
+      "presentation": { "reveal": "never", "focus": false, "panel": "shared", "clear": true, "echo": false, "showReuseMessage": false }
     }
   ]
 }
