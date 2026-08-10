@@ -4,6 +4,15 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-10 · M2 练习 3 完成 ✅
+
+- **需求**：用户「继续」→ 按协议读 STATUS，发现 git status 里 `practice/02/03_dynamic_avg.cpp` 已改，直接进入练习 3 review。
+- **review（两轮）**：第一轮核心逻辑达标（new[]/delete[] 配对 + 删后置空、填值 `(i+1)*1.5`、fixed+setprecision(2)、防御检查放在 new 之前），但两处未过：① `for (size_t i = 0; i < n; i++)` 与 int n 比较 → `-Wsign-compare` 警告（违反 0 警告规则）；② 防御分支裸 `throw;` —— 实测 n=0/-3 输出 `terminate called without an active exception`（std::terminate → abort，退出码 3），不是「报错退出」。第二轮用户改为 `int i` + `std::cerr << "n must be positive\n"; return 1;`。
+- **验证**：0 警告 0 错误；n=5 → `avg = 4.50` 退出码 0；n=0 / n=-3 → stderr 报错 + 退出码 1，全部通过。
+- **教学点**：裸 `throw;` 无异常在飞时 = terminate（看似崩溃）；报错退出标准式是 `std::cerr` + `return 非0`。
+- **结论**：M2 练习 1-3 全部通过 review ✅。进度三处已同步 + 已提交。
+- **下一步建议**：练习 4（`04_ref_or_ptr.cpp`：find 返回指针 / setMin 引用 / 3 思考题）→ 自评表 → 全 ✅ 进 M3。
+
 ### 2026-08-07 · 本机部署 + M2 练习 1-2 完成 ✅
 
 - **需求**：部署项目 → 看 M2 文档 → 开始练习。
