@@ -68,8 +68,8 @@
 
 ## 编译环境与约束（必须遵守）
 
-- 编译器：`tools/toolchain.config` 的 `MINGW_BIN` 指向（本机当前为 `D:/Dev_soft/mingw64/bin`，g++ **14.2.0**，MinGW-Builds 独立发行版；其他机器以 config / 自动探测结果为准）。⚠️ 若用 MSYS2 发行版：选 MINGW64 而非 UCRT64（部分精简系统缺 UCRT 的 `api-ms-win-crt-*.dll`，UCRT64 版 cc1plus 无法运行）。旧 Qt 自带 g++ 7.3 **不要再用**。
-- 调试器：`tools/toolchain.config` 的 `MINGW_BIN` 定位 `gdb.exe`（本机当前 GDB **14.2**）。另有 `mingw32-make.exe`（GNU Make 4.4.1）。
+- 编译器：`tools/toolchain.config` 的 `MINGW_BIN` 指向（本机当前为 `D:/XC_workspace/msys64/mingw64/bin`，g++ **16.1.0**，MSYS2 MINGW64 发行版；其他机器以 config / 自动探测结果为准）。⚠️ 若用 MSYS2 发行版：选 MINGW64 而非 UCRT64（部分精简系统缺 UCRT 的 `api-ms-win-crt-*.dll`，UCRT64 版 cc1plus 无法运行）。旧 Qt 自带 g++ 7.3 **不要再用**。MSYS2 libstdc++ 默认开 `_GLIBCXX_ASSERTIONS`：`operator[]` 越界直接 abort 报断言——能帮抓越界 bug，但要记住「断言拦截 ≠ 代码正确」。
+- 调试器：`tools/toolchain.config` 的 `MINGW_BIN` 定位 `gdb.exe`（本机当前 GDB **17.2**）。另有 `mingw32-make.exe`（GNU Make 4.4.1）。
 - **路径自适应（关键，2026-08）**：所有 `tools/*.sh` / `*.bat` 从**脚本自身位置**定位项目根（`BASH_SOURCE` / `%~dp0`），不依赖调用时的当前目录；工具链解析顺序为「环境变量 `MINGW_BIN` → `tools/toolchain.config` → 自动探测常见路径」。部署到新位置/新机器后跑一次 `tools/setup.bat`（或 `setup.sh`）：探测工具链 → 重写 `toolchain.config` → 从 `.vscode/*.template` 重新生成 `launch.json` / `c_cpp_properties.json`。**约定**：`.bat` 文件必须保持**纯 ASCII**（cmd 按 ANSI 代码页解析，UTF-8 中文会破坏命令解析）；`.sh` 是 UTF-8 原生不受限。需要改路径一律改 `toolchain.config`，不要手改散落的硬编码。
 - ⚠️ **DLL 污染与项目级运行时（关键，2026-08 修复）**：系统 PATH 里可能混有 Git / Qt 的旧 mingw 目录（如 `C:\Program Files\Git\mingw64\bin`、`C:\Qt\Qt5.12.12\Tools\mingw730_64\bin`），也可能直接指向新工具链（本机即 `D:\Dev_soft\mingw64\bin` 在 PATH 中）。若 exe 解析到**旧版 `libstdc++-6.dll`**，用新 g++ 编译的程序在**调试器下首次 `std::cout` 会段错误**（独立运行可能正常）。因此 `tools/compile.*` / `build.*` / `gdb.*` 每次编译都会把 MSYS2 的 3 个运行库（`libstdc++-6.dll`、`libgcc_s_seh-1.dll`、`libwinpthread-1.dll`）同步进 `build/`——Windows 按「exe 所在目录优先于 PATH」解析 DLL，exe 身边的正确版本绕开一切 PATH 污染。**不要删除 `build/` 里的这 3 个 DLL**；脚本会在下次编译时自动补回。另：Git Bash 里给 Windows 进程加 PATH 必须用 MSYS 路径 `/d/...`，`D:/...` 正斜杠形式在 Windows DLL 搜索里不生效。
 - 标准：项目默认 `-std=c++17 -Wall -Wextra -g`（已封装进 `tools/compile.*`，直接用脚本，不要手敲原始命令）。GCC 14+ 完整支持 C++20/23，需要时经用户确认可升级默认标准。
