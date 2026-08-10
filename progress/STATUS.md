@@ -8,16 +8,18 @@
 
 **正在做 In progress：**
 
-- **M3 · STL 容器与算法** —— 待开始（下一步）。
+- **M3 · STL 容器与算法** —— 内容已生成 ✅（文档/4 示例/4 练习+答案，全部编译验证），**练习 1-4 待用户完成**。
 - **M6-1 · gdb 调试入门** —— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位（可随时并行练）。
 
 **下一步 Next：**
 
-1. **开始 M3 · STL 容器与算法**（vector / string / map / set / 迭代器 / algorithm / 复杂度）—— 与算法刷题直接相关。
-2. M6-1 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
+1. **完成 M3 练习 1-4**（`01_vector_avg` vector 重写求平均 / `02_frequency` map 频率 / `03_dedup` set 去重+binary_search / `04_string_ops` string 处理）。
+2. 完成后填文末自评表 → 回来 review → 全 ✅ 进 M4 面向对象深入。
+3. M6-1 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
 
 **已完成 Done：**
 
+- **M3 STL 容器与算法 —— 内容生成 ✅（2026-08-10）**：`docs/03-stl-containers-and-algorithms.md` + `examples/03/` 4 示例（01 vector / 02 string / 03 map_set / 04 algorithms，编译 0 警告 + 运行验证）+ `practice/03/exercises.md` + 4 骨架 + `solutions/`（4/4 编译 0 警告 + 用例全对）。覆盖 vector 自动内存管理 / string / map-set 有序查找 / 迭代器区间 `[begin,end)` / algorithm 常用算法 / 复杂度选型。
 - **M2 · 引用/指针/内存模型 —— 完成 ✅（2026-08-10）**：练习 1-4 全部 review 通过 + 自评全 ✅。练习 3 动态数组求平均（new[]/delete[] 配对、防御 n<=0、double 除法）；练习 4 find/setMin（指针返回 nullptr 表达「找不到」、引用就地修改 + 3 思考题，口诀「是否需要判断是否存在」）；练习 1 预测输出 / 练习 2 找 3 内存 bug 于 2026-08-07 通过。
 - **格式化工具链（LLVM 风格）✅（2026-08-10，commit `b7f1abe`）**：`.clang-format` 项目适配版（LLVM 基础 + 指针/引用左对齐保持 `int* p` + 中文注释不重排 + 列宽 100）+ `tools/format.sh/.bat`（自动定位 clang-format：环境变量 > VS Code 扩展内置 22.1.3 > PATH）+ VS Code `defaultFormatter` 固定 C/C++ 扩展（消掉「选择格式化器」弹窗）。
 - **M2 练习 1-2 通过 review ✅（2026-08-07）**：练习 1 预测输出 4 题全对（措辞精确化：引用即同一对象、指针改绑表述）；练习 2 找 3 个内存 bug 全修好（泄漏/双删/悬垂，输出 `1 42 7` 正确），注释已清理。

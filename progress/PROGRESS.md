@@ -4,6 +4,16 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-10 · M3 STL 容器与算法 —— 内容生成（待练习）
+
+- **需求**：M2 全 ✅ 后按规则进入 M3，用户确认「继续」。
+- **产出**：
+  - `docs/03-stl-containers-and-algorithms.md`：STL 三大件（容器/迭代器/算法）→ vector（对比 M2 new[]/delete[]，遍历三件套，capacity 翻倍）→ string（拼接/子串/find/getline/c_str）→ map/set（有序 O(log n)，`map[key]` 自动插默认值坑）→ 迭代器（`[begin,end)` 区间、失效）→ `<algorithm>` 常用算法（sort/binary_search/find/count/accumulate/min_max/reverse）→ 复杂度速查与选型口诀 → 8 条易错点 → 自测。
+  - `examples/03/` 4 示例：01_vector_basics（含 capacity 增长实测）/ 02_string_ops / 03_map_set / 04_algorithms；全部编译 0 警告 + 运行验证。
+  - `practice/03/exercises.md`：4 练习（vector 重写求平均——直接呼应 M2 思考题答案 / map 频率统计 / set 去重+binary_search / string 单词统计反转）+ 自评表（5 行）；4 个骨架文件；`solutions/` 4 份参考答案（编译 0 警告，用例全对：avg 4.50、频率 1 2 / 2 1 / 3 3、dedup 1 2 3 4 + 3 in、words=5 longest=coding 反转正确）。
+- **结论**：M3 内容闭环就绪（生成→编译验证→骨架→答案）。ROADMAP M3 → 🔄。
+- **下一步建议**：用户完成练习 1-4 后回来 review + 自评 → 全 ✅ 进 M4。
+
 ### 2026-08-10 · M2 练习 4 review ✅ + M2 全部完成（全 ✅ 进 M3）
 
 - **需求**：继续 M2，做完练习 4。
