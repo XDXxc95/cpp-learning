@@ -60,8 +60,8 @@ tools\setup.bat
 ### 4. 验证 | Verify
 
 ```bash
-tools/compile.sh examples/00-getting-started/hello.cpp   # Git Bash
-tools\compile.bat examples\00-getting-started\hello.cpp  # cmd
+tools/compile.sh examples/00/hello.cpp   # Git Bash
+tools\compile.bat examples\00\hello.cpp  # cmd
 ```
 
 看到 `Hello, World!` 即环境正常。

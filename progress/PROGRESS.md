@@ -4,6 +4,15 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-10 · 目录层级统一（结构清理）
+
+- **需求**：用户反馈「序号文件夹的层次有点混乱」。
+- **问题盘点**：① `examples/` / `practice/` 下残留一批**空壳目录**（`03`/`04`/`05`/`07`/`08`，git 不追踪空目录、只在磁盘上）；② M3 子模块用 `03-1`，但 M6-1 却放 `06` —— 子模块命名不统一；③ `00-getting-started` 是「NN-主题」风格，与其他 `NN` 不一致。
+- **约定（已固化进 CLAUDE.md 文档生成规范）**：目录/文档名 = **交付块号** —— 整块交付的模块用 `NN`（M1→`01`、M2→`02`），拆分模块用 `NN-N`（M3→`03-1`、M6→`06-1`）；**不建空壳目录**。
+- **改动**：`git mv` `docs/06-gdb-debugging.md`→`06-1-gdb-debugging.md`、`examples/06/`→`06-1/`、`practice/06/`→`06-1/`、`examples/00-getting-started/`→`00/`；删除空壳 `examples/{03,04,05,07,08}`、`practice/{03,04,05,08}`（`practice/07/sieve.cpp` 保留）；同步更新引用（`docs/06-1`、`practice/06-1/exercises.md`、`solutions/01_debug_me.md`、`docs/00`、`README.md`）。
+- **结论**：`docs/`、`examples/`、`practice/` 三处目录现为 `00 / 01 / 02 / 03-1 / 06-1 / 07` 干净一致。PROGRESS 历史日志不改写（记录当时路径实况）。
+- **下一步建议**：学习状态不变——M3-1 练习 1-4 待用户完成。
+
 ### 2026-08-10 · M3-1 string + vector 内容生成（待练习）
 
 - **需求**：M2 收官后按 AskUserQuestion 确认「现在就生成 M3-1」。

@@ -31,13 +31,13 @@ g++ -std=c++17 -Wall -Wextra -g -o build/xxx.exe 源文件.cpp
 ## 跑通第一个程序 First Run
 
 ```bash
-tools/compile.sh examples/00-getting-started/hello.cpp
+tools/compile.sh examples/00/hello.cpp
 ```
 
 预期输出：
 
 ```text
-==> 编译 Compiling: examples/00-getting-started/hello.cpp
+==> 编译 Compiling: examples/00/hello.cpp
 ==> 运行 Running: build/hello.exe
 Hello, World!
 year=2026 pi=3.14159 msg=C++ learning ready=1
@@ -48,7 +48,7 @@ year=2026 pi=3.14159 msg=C++ learning ready=1
 
 ## 看一眼代码 Code Walkthrough
 
-打开 `examples/00-getting-started/hello.cpp`：
+打开 `examples/00/hello.cpp`：
 
 ```cpp
 #include <iostream>   // 输入输出流 input/output stream
@@ -71,7 +71,7 @@ int main() {                    // 主函数，程序入口 entry point
 ## 进入调试器 Try gdb
 
 ```bash
-tools/gdb.sh examples/00-getting-started/hello.cpp
+tools/gdb.sh examples/00/hello.cpp
 ```
 
 然后在 `(gdb)` 提示符下依次输入：
