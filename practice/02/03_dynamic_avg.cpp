@@ -5,6 +5,7 @@
 //   3. 求平均输出，保留 2 位小数（<iomanip>: std::fixed + std::setprecision(2)）
 //   4. delete[] 完整收尾（一个 new 恰好一个 delete）
 //   5. 防御：n <= 0 时报错退出
+#include <iomanip>
 #include <iostream>
 
 int main() {
@@ -12,7 +13,23 @@ int main() {
   std::cout << "n = ";
   std::cin >> n;
 
-  // TODO: 你的实现（要求 1-5）
+  if (n <= 0) {
+    std::cerr << "n <= 0 \n";
+    return 1;
+  }
+
+  double* arr = new double[n];
+  double sum = 0;
+  for (int i = 0; i < n; i++) {
+    arr[i] = (i + 1) * 1.5;
+    sum += arr[i];
+  }
+
+  std::cout << std::fixed << std::setprecision(2);
+  std::cout << "avg: " << sum / n;
+
+  delete[] arr;
+  arr = nullptr;
 
   return 0;
 }

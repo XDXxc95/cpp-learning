@@ -4,6 +4,15 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-10 · 格式化工具链（LLVM 风格）+ M2 练习 3 review ✅
+
+- **需求**：继续 M2 学习（做练习 3-4）；顺带「把 llvm 规范设置好」。
+- **做了什么**：
+  - **LLVM 风格配置（commit `b7f1abe`）**：项目已有 `.clang-format`（`BasedOnStyle: LLVM`）但 clang-format 不在 PATH → 新增 `tools/format.sh` / `format.bat`（定位顺序：环境变量 `CLANG_FORMAT` > VS Code C/C++ 扩展内置 clang-format 22.1.3 > PATH；路径自适应；`--check` 只检查不改写）。实测**纯 LLVM 有破坏性**：把全库 `int*`→`int *`、并把中文长注释重排成不连贯断行（`找不到返回 / nullptr 造一个数组…`）→ `.clang-format` 改为**项目适配版**：`PointerAlignment/ReferenceAlignment: Left`（保持 `int* p`/`int& r`）、`ReflowComments: false`（防拆中文注释）、`ColumnLimit: 100`（80 对中文注释按 2 列宽计太紧）。`.vscode/settings.json` 固定 `editor.defaultFormatter: ms-vscode.cpptools`（同时装了 xaver.clang-format 会弹「选择格式化器」，默认键 Shift+Alt+F，Shift+Ctrl+F 是查找）。CLAUDE.md 常用命令补 format 用法。验证：中文注释零改动、指针风格保持、`for` 排版乱码被规范化、`--check` 每文件残留仅 1-5 条美观性对齐。
+  - **练习 3 review ✅**：用户独立完成 `03_dynamic_avg.cpp`。编译 0 警告；边界测试 n=5→`avg: 4.50` / n=1→`1.50` / n=0,-3→`n <= 0` 退出码 1 全过。做对点：new[]/delete[] 配对、`sum/n` 是 double 除法（sum 为 double 没踩整数除法坑）、`n` 初始化 0 兜底 cin 读取失败、cerr 报错 + return 1、delete 后置 nullptr。用户自查 `format.sh` 对齐风格（大括号/指针/include 排序），Claude 删残留 `// TODO` 注释，`format --check` 通过。
+- **结论**：M2 练习 3 达标 ✅；格式化工具链就绪（VS Code Shift+Alt+F 与 `tools/format.*` 双通道，项目适配版不破坏中文注释与现有风格）。
+- **下一步建议**：练习 4（`04_ref_or_ptr.cpp`：find 指针返回 + setMin 引用 + 注释答 3 思考题）→ 填自评表 → review 全 ✅ 进 M3。
+
 ### 2026-08-07 · 本机部署 + M2 练习 1-2 完成 ✅
 
 - **需求**：部署项目 → 看 M2 文档 → 开始练习。
