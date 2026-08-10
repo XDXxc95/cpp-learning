@@ -4,6 +4,18 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-10 · M3-1 string + vector 内容生成（待练习）
+
+- **需求**：M2 收官后按 AskUserQuestion 确认「现在就生成 M3-1」。
+- **产出**：
+  - `docs/03-1-string-and-vector.md`：容器=内存管理的答案（回答 M2 练习3 的 sieve 悬案）→ string 常用成员 + find/npos → vector 常用成员 + 遍历 → 手动 new[]/delete[] vs vector 对比表 → 传参铁则（const& 首选）→ 易错点 5 条 → 自测 5 问；
+  - `examples/03-1/` 3 示例：01_string_basics（创建/拼接/find+npos/substr/遍历）、02_vector_basics（创建/push_back/[] vs at/front-back/pop_back）、03_vector_vs_manual（M2 练习3 同款动态求平均，手动 vs vector 并排 + const& 传参 + 空容器防御）；
+  - `practice/03-1/exercises.md` + 3 骨架 + `solutions/` 3 答案：练习1 string 反转（长度/空格数/反转）、练习2 vector 统计（max/min/avg，禁手动 new/delete，n<=0 防御）、练习3 const& 传参（sum vs sumByValue）、练习4 思考题（为什么不用 delete[]、size_t 陷阱、[] vs at）。
+- **验证**：示例 3/3、答案 3/3 编译 0 警告；运行验证输出正确（反转 `oof dlrow olleh`、max 9/min -1/avg 3.60、n=0 报错退出码 1、sum 双版本 15/15）。
+- **结构决策**：M3 按子模块 `03-1`/`03-2`/`03-3` 拆（文档、examples、practice 各自独立目录），保证每小节自包含、随时可暂停续接。
+- **结论**：M3-1 内容闭环就绪（生成→编译验证→骨架→答案）。ROADMAP M3 → 🔄。
+- **下一步建议**：用户完成 M3-1 练习 1-4 → 回来 review + 自评 → 全 ✅ 进 M3-2（迭代器 + algorithm）；M6-1 越界 bug 定位可并行。
+
 ### 2026-08-10 · M2 练习 4 完成 + 补课「引用 vs 指针」→ M2 收官 ✅
 
 - **需求**：接上轮，review 练习 4 → 用户补 missing 测试与思考题 → 自评表「判断何时引用/指针」一栏主动要求补课。
