@@ -1,3 +1,12 @@
-# 代码风格 Code style: LLVM
-# 让 VS Code 的 C/C++ 自动补全与格式化遵循 LLVM 规范（2 空格缩进、大括号同行、80 列）
+# 代码风格 Code style: LLVM（项目适配版 | project-adapted）
+# 基础 BasedOnStyle: LLVM — 2 空格缩进、大括号同行、列宽上限
+# 项目适配 4 项（防破坏现有代码 / 中文注释）：
+#   - PointerAlignment / ReferenceAlignment: Left → 保持项目习惯的 `int* p` / `int& r`
+#   - ReflowComments: false → 不重排注释，避免 clang-format 把中文长注释拆成不连贯断行
+#   - ColumnLimit: 100 → LLVM 的 80 列对中文注释（每字按 2 列宽计）太紧，放宽到 100
+# 想调整：改 ColumnLimit 即可；想回到官方纯 LLVM 就删掉下面 4 行。
 BasedOnStyle: LLVM
+PointerAlignment: Left
+ReferenceAlignment: Left
+ReflowComments: false
+ColumnLimit: 100

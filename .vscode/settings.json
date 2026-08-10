@@ -2,6 +2,9 @@
   // C++ 代码风格：自动补全/格式化遵循 LLVM（2 空格、大括号同行）
   // 根目录已有 .clang-format，此设置为兜底 fallback
   "C_Cpp.clang_format_fallbackStyle": "LLVM",
+  // 唯一默认格式化器：C/C++ 扩展（内置 clang-format，读根目录 .clang-format）。
+  // 项目里同时装了 xaver.clang-format 等其它 C++ 格式化器，不指定会反复弹「选择格式化器」。
+  "editor.defaultFormatter": "ms-vscode.cpptools",
   // 输入时自动格式化（分号/大括号后），让自动补全的代码即时落到 LLVM 风格
   "editor.formatOnType": true,
   // 保存时不强制格式化，避免把已有代码批量重排
