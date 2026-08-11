@@ -6,9 +6,9 @@
 
 ## 练习 1 · 基础走读（hello.cpp）— 5 分钟
 
-用 `examples/00/hello.cpp` 练手感：
+用 `examples/00-getting-started/hello.cpp` 练手感：
 
-1. `bash tools/gdb.sh examples/00/hello.cpp`
+1. `bash tools/gdb.sh examples/00-getting-started/hello.cpp`
 2. `break main` → `run` → 停在 main 第几行？
 3. `next` 两次，`print year`——输出是 2026 吗？为什么？
 4. 继续 `next` 到程序跑完，观察：程序结束后 gdb 还在吗？此时 `print year` 报什么？为什么？
@@ -17,7 +17,7 @@
 ## 练习 2 · 揪出隐蔽 bug（01_debug_me.cpp）— 20–30 分钟 ⭐ 本节核心
 
 ```bash
-bash tools/gdb.sh examples/06-1/01_debug_me.cpp
+bash tools/gdb.sh examples/06/01_debug_me.cpp
 ```
 
 先**直接运行**看症状（编译后再 `./build/01_debug_me.exe`），记下输出哪里不对。然后：
@@ -28,7 +28,7 @@ bash tools/gdb.sh examples/06-1/01_debug_me.cpp
    - `i=0` 时 `p[i+1]` 该是几？（应该 2）
    - `i=3`（最后一次）时 `p[i+1]` 是多少？**这个值哪里来的？**（提示：`n=4`，`p` 指向的缓冲区只有 4 个元素，下标合法范围是 0..3）
 4. 用 `print n` 确认元素个数，想清楚：当 `i` 到 `n-1` 时，`p[i+1]` 就是 `p[n]`——**读到了缓冲区末尾之外**。这就是越界读（out-of-bounds read）。
-5. 修复：把 `01_debug_me.cpp` 复制到 `practice/06-1/` 下（命名 `01_debug_me_fixed.cpp`），改对循环边界，编译运行确认输出 `3 5 7`（3 个数）。
+5. 修复：把 `01_debug_me.cpp` 复制到 `practice/06/` 下（命名 `01_debug_me_fixed.cpp`），改对循环边界，编译运行确认输出 `3 5 7`（3 个数）。
 6. 用 gdb 在**修复后的版本**上确认循环只跑 3 次。
 
 ## 练习 3 · 挑战：条件断点 + 调用栈（optional，15 分钟）

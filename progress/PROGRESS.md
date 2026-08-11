@@ -4,43 +4,80 @@
 
 ## 会话记录 Sessions
 
-### 2026-08-10 · 目录层级统一（结构清理）
+### 2026-08-11 · 双端同步：合并本机与远端的并行会话
+
+- **需求**：用户「同步远端的代码」。发现本机 main 与 origin/main 各领先 5 个提交——本机为当天下午（13:19–14:36）会话，远端为当晚（22:58–23:50）另一台机器上的会话，两者并行做了同一批里程碑。
+- **结构决策（以远端为准）**：M3 改为**整块交付 `03/`**（STL 容器与算法），M6 改为 `06/`（不再拆 06-1）。本机 M3-1（string+vector）内容与 `03-1`/`06-1` 目录被远端结构取代，**全部保留在本机 git 历史里**：用户 M3-1 练习1 完整解法在 commit `d5184f8`，可 `git show d5184f8:practice/03-1/01_string_reverse.cpp` 取回。
+- **保留的本机独有内容**：CLAUDE.md 工具链段（本机 MSYS2 g++ 16.1 / gdb 17.2；远端的 14.2 / Dev_soft 是本机错误信息，未采纳）。
+- **日志说明**：下面同时保留本机（下午）与远端（当晚）的会话条目——M2 练习3/4、M3 内容各有两条记录，属并行会话实况，不改写。
+- **git 基础**：GitHub SSH 22 端口被拒 → `~/.ssh/config` 增加 `Host github.com` → `HostName ssh.github.com` / `Port 443`。
+- **下一步建议**：M3 练习 1-4 待用户完成 → review + 自评 → 全 ✅ 进 M4。
+
+### 2026-08-10 · M3 STL 容器与算法 —— 内容生成（待练习）【远端当晚会话】
+
+- **需求**：M2 全 ✅ 后按规则进入 M3，用户确认「继续」。
+- **产出**：
+  - `docs/03-stl-containers-and-algorithms.md`：STL 三大件（容器/迭代器/算法）→ vector（对比 M2 new[]/delete[]，遍历三件套，capacity 翻倍）→ string（拼接/子串/find/getline/c_str）→ map/set（有序 O(log n)，`map[key]` 自动插默认值坑）→ 迭代器（`[begin,end)` 区间、失效）→ `<algorithm>` 常用算法（sort/binary_search/find/count/accumulate/min_max/reverse）→ 复杂度速查与选型口诀 → 8 条易错点 → 自测。
+  - `examples/03/` 4 示例：01_vector_basics（含 capacity 增长实测）/ 02_string_ops / 03_map_set / 04_algorithms；全部编译 0 警告 + 运行验证。
+  - `practice/03/exercises.md`：4 练习（vector 重写求平均——直接呼应 M2 思考题答案 / map 频率统计 / set 去重+binary_search / string 单词统计反转）+ 自评表（5 行）；4 个骨架文件；`solutions/` 4 份参考答案（编译 0 警告，用例全对：avg 4.50、频率 1 2 / 2 1 / 3 3、dedup 1 2 3 4 + 3 in、words=5 longest=coding 反转正确）。
+- **结论**：M3 内容闭环就绪（生成→编译验证→骨架→答案）。ROADMAP M3 → 🔄。
+- **下一步建议**：用户完成练习 1-4 后回来 review + 自评 → 全 ✅ 进 M4。
+
+### 2026-08-10 · M2 练习 4 review ✅ + M2 全部完成（全 ✅ 进 M3）【远端当晚会话】
+
+- **需求**：继续 M2，做完练习 4。
+- **做了什么**：
+  - **练习 4 review ✅**：用户独立完成 `04_ref_or_ptr.cpp`。`find` 遍历返回 `&arr[i]` / 落空 `nullptr`，main 里两条路径都测（`3` / `not found`）；`setMin` `if(a<b) b=a; else a=b;` 两数取小；用 `sizeof(a)/sizeof(int)` 没硬编码长度。编译 0 警告，输出 `3 / not found / 5,3 -> 3,3` 全对。
+  - **思考题确认**：①「需要判断是否存在」→ 本质是引用没有空引用，nullptr 表达「找不到」；②「函数内使用简单 + 形参约束一定存在」→ 补调用方也简单（不用 `&`）；③ 口诀「是否需要判断是否存在」→ 凝练为「可能没有结果→指针，必然存在→引用」。口诀无标准答案，用户自拟达标。
+  - **收尾**：删残留 `// 占位` 注释 + `format.sh` 对齐（`--check` 通过）；用户自评全 ✅（填入 `exercises.md` 自评表）。
+- **结论**：**M2 全部完成 ✅**（练习 1-4 全过 + 自评全熟练）。M2 的心智模型——引用即别名、堆生命周期、new/delete 配对、指针表达「可能不存在」——是 M3 容器与 M4 拷贝控制的地基。
+- **下一步建议**：进入 **M3 STL 容器与算法**（vector/string/map/set/迭代器/algorithm/复杂度），与算法刷题直接相关；M6-1 gdb 越界 bug 可并行。
+
+### 2026-08-10 · 格式化工具链（LLVM 风格）+ M2 练习 3 review ✅【远端当晚会话】
+
+- **需求**：继续 M2 学习（做练习 3-4）；顺带「把 llvm 规范设置好」。
+- **做了什么**：
+  - **LLVM 风格配置（commit `b7f1abe`）**：项目已有 `.clang-format`（`BasedOnStyle: LLVM`）但 clang-format 不在 PATH → 新增 `tools/format.sh` / `format.bat`（定位顺序：环境变量 `CLANG_FORMAT` > VS Code C/C++ 扩展内置 clang-format 22.1.3 > PATH；路径自适应；`--check` 只检查不改写）。实测**纯 LLVM 有破坏性**：把全库 `int*`→`int *`、并把中文长注释重排成不连贯断行（`找不到返回 / nullptr 造一个数组…`）→ `.clang-format` 改为**项目适配版**：`PointerAlignment/ReferenceAlignment: Left`（保持 `int* p`/`int& r`）、`ReflowComments: false`（防拆中文注释）、`ColumnLimit: 100`（80 对中文注释按 2 列宽计太紧）。`.vscode/settings.json` 固定 `editor.defaultFormatter: ms-vscode.cpptools`（同时装了 xaver.clang-format 会弹「选择格式化器」，默认键 Shift+Alt+F，Shift+Ctrl+F 是查找）。CLAUDE.md 常用命令补 format 用法。验证：中文注释零改动、指针风格保持、`for` 排版乱码被规范化、`--check` 每文件残留仅 1-5 条美观性对齐。
+  - **练习 3 review ✅**：用户独立完成 `03_dynamic_avg.cpp`。编译 0 警告；边界测试 n=5→`avg: 4.50` / n=1→`1.50` / n=0,-3→`n <= 0` 退出码 1 全过。做对点：new[]/delete[] 配对、`sum/n` 是 double 除法（sum 为 double 没踩整数除法坑）、`n` 初始化 0 兜底 cin 读取失败、cerr 报错 + return 1、delete 后置 nullptr。用户自查 `format.sh` 对齐风格（大括号/指针/include 排序），Claude 删残留 `// TODO` 注释，`format --check` 通过。
+- **结论**：M2 练习 3 达标 ✅；格式化工具链就绪（VS Code Shift+Alt+F 与 `tools/format.*` 双通道，项目适配版不破坏中文注释与现有风格）。
+- **下一步建议**：练习 4（`04_ref_or_ptr.cpp`：find 指针返回 + setMin 引用 + 注释答 3 思考题）→ 填自评表 → review 全 ✅ 进 M3。
+
+### 2026-08-10 · 目录层级统一（结构清理）【本机下午会话；已被远端 M3/M6 整块结构取代，保留作历史】
 
 - **需求**：用户反馈「序号文件夹的层次有点混乱」。
 - **问题盘点**：① `examples/` / `practice/` 下残留一批**空壳目录**（`03`/`04`/`05`/`07`/`08`，git 不追踪空目录、只在磁盘上）；② M3 子模块用 `03-1`，但 M6-1 却放 `06` —— 子模块命名不统一；③ `00-getting-started` 是「NN-主题」风格，与其他 `NN` 不一致。
-- **约定（已固化进 CLAUDE.md 文档生成规范）**：目录/文档名 = **交付块号** —— 整块交付的模块用 `NN`（M1→`01`、M2→`02`），拆分模块用 `NN-N`（M3→`03-1`、M6→`06-1`）；**不建空壳目录**。
-- **改动**：`git mv` `docs/06-gdb-debugging.md`→`06-1-gdb-debugging.md`、`examples/06/`→`06-1/`、`practice/06/`→`06-1/`、`examples/00-getting-started/`→`00/`；删除空壳 `examples/{03,04,05,07,08}`、`practice/{03,04,05,08}`（`practice/07/sieve.cpp` 保留）；同步更新引用（`docs/06-1`、`practice/06-1/exercises.md`、`solutions/01_debug_me.md`、`docs/00`、`README.md`）。
-- **结论**：`docs/`、`examples/`、`practice/` 三处目录现为 `00 / 01 / 02 / 03-1 / 06-1 / 07` 干净一致。PROGRESS 历史日志不改写（记录当时路径实况）。
+- **约定（当时固化进 CLAUDE.md）**：目录/文档名 = **交付块号** —— 整块交付的模块用 `NN`（M1→`01`、M2→`02`），拆分模块用 `NN-N`（M3→`03-1`、M6→`06-1`）；**不建空壳目录**。⚠️ 2026-08-11 双端合并后 M3/M6 改为整块 `03`/`06`（见顶部条目）。
+- **改动**：`git mv` `docs/06-gdb-debugging.md`→`06-1-gdb-debugging.md`、`examples/06/`→`06-1/`、`practice/06/`→`06-1/`、`examples/00-getting-started/`→`00/`；删除空壳 `examples/{03,04,05,07,08}`、`practice/{03,04,05,08}`（`practice/07/sieve.cpp` 保留）；同步更新引用。
+- **结论**：PROGRESS 历史日志不改写（记录当时路径实况）。
 - **下一步建议**：学习状态不变——M3-1 练习 1-4 待用户完成。
 
-### 2026-08-10 · M3-1 string + vector 内容生成（待练习）
+### 2026-08-10 · M3-1 string + vector 内容生成（待练习）【本机下午会话；已被远端 M3 STL 取代，保留作历史】
 
 - **需求**：M2 收官后按 AskUserQuestion 确认「现在就生成 M3-1」。
 - **产出**：
   - `docs/03-1-string-and-vector.md`：容器=内存管理的答案（回答 M2 练习3 的 sieve 悬案）→ string 常用成员 + find/npos → vector 常用成员 + 遍历 → 手动 new[]/delete[] vs vector 对比表 → 传参铁则（const& 首选）→ 易错点 5 条 → 自测 5 问；
   - `examples/03-1/` 3 示例：01_string_basics（创建/拼接/find+npos/substr/遍历）、02_vector_basics（创建/push_back/[] vs at/front-back/pop_back）、03_vector_vs_manual（M2 练习3 同款动态求平均，手动 vs vector 并排 + const& 传参 + 空容器防御）；
-  - `practice/03-1/exercises.md` + 3 骨架 + `solutions/` 3 答案：练习1 string 反转（长度/空格数/反转）、练习2 vector 统计（max/min/avg，禁手动 new/delete，n<=0 防御）、练习3 const& 传参（sum vs sumByValue）、练习4 思考题（为什么不用 delete[]、size_t 陷阱、[] vs at）。
+  - `practice/03-1/exercises.md` + 3 骨架 + `solutions/` 3 答案：练习1 string 反转（长度/空格数/反转）、练习2 vector 统计（max/min/avg，禁手动 new/delete，n<=0 防御）、练习3 const& 传参（sum vs sumByValue）、练习4 思考题。
 - **验证**：示例 3/3、答案 3/3 编译 0 警告；运行验证输出正确（反转 `oof dlrow olleh`、max 9/min -1/avg 3.60、n=0 报错退出码 1、sum 双版本 15/15）。
-- **结构决策**：M3 按子模块 `03-1`/`03-2`/`03-3` 拆（文档、examples、practice 各自独立目录），保证每小节自包含、随时可暂停续接。
-- **结论**：M3-1 内容闭环就绪（生成→编译验证→骨架→答案）。ROADMAP M3 → 🔄。
-- **下一步建议**：用户完成 M3-1 练习 1-4 → 回来 review + 自评 → 全 ✅ 进 M3-2（迭代器 + algorithm）；M6-1 越界 bug 定位可并行。
+- **结论**：M3-1 内容闭环就绪。ROADMAP M3 → 🔄。
+- **下一步建议**：用户完成 M3-1 练习 1-4 → 回来 review + 自评 → 全 ✅ 进 M3-2（迭代器 + algorithm）。
 
-### 2026-08-10 · M2 练习 4 完成 + 补课「引用 vs 指针」→ M2 收官 ✅
+### 2026-08-10 · M2 练习 4 完成 + 补课「引用 vs 指针」→ M2 收官 ✅【本机下午会话】
 
 - **需求**：接上轮，review 练习 4 → 用户补 missing 测试与思考题 → 自评表「判断何时引用/指针」一栏主动要求补课。
 - **练习 4 review（三轮）**：首轮 `s.length` 编译错误（C 数组无 `.length`，Java 语法）+ 缺 not-found 测试 + setMin 未打印 + 三元表达式当语句 + 思考题②空白。第二轮用户修 `sizeof`、补 not-found 分支、setMin 改 if-else。第三轮补 setMin 打印 + 思考题②（「内部简洁、形参清晰、避免忘判 nullptr」——自述，达标）。最终编译 0 警告，输出 `find : 4` / `not find` / `3 3`。
 - **补课「判断引用 vs 指针」**：讲判断树三问（①会不存在吗→指针 ②要改绑/指针运算吗→指针 ③否则引用，只读用 `const T&`）。5 道当堂判断题选择全对，但第 4 题（先指 A 再指 B）理由跑偏（写成「可能指向 nullptr」）；纠正为「引用不能改绑」——铁律②。用户复述确认：「需要改变指向对象、绑定关系改变，只能用指针」✅。
 - **自评表**：4 项全 ✅（2026-08-10），已填进 `practice/02/exercises.md`。
-- **结论**：M2 引用/指针/内存模型收官 ✅（练习 1-4 + 自评全过）。进度三处同步 + 提交。
+- **结论**：M2 引用/指针/内存模型收官 ✅（练习 1-4 + 自评全过）。
 - **下一步建议**：生成并进入 M3 STL 容器与算法（薄而精，一次一小节；M6-1 gdb 越界 bug 可并行）。
 
-### 2026-08-10 · M2 练习 3 完成 ✅
+### 2026-08-10 · M2 练习 3 完成 ✅【本机下午会话】
 
 - **需求**：用户「继续」→ 按协议读 STATUS，发现 git status 里 `practice/02/03_dynamic_avg.cpp` 已改，直接进入练习 3 review。
 - **review（两轮）**：第一轮核心逻辑达标（new[]/delete[] 配对 + 删后置空、填值 `(i+1)*1.5`、fixed+setprecision(2)、防御检查放在 new 之前），但两处未过：① `for (size_t i = 0; i < n; i++)` 与 int n 比较 → `-Wsign-compare` 警告（违反 0 警告规则）；② 防御分支裸 `throw;` —— 实测 n=0/-3 输出 `terminate called without an active exception`（std::terminate → abort，退出码 3），不是「报错退出」。第二轮用户改为 `int i` + `std::cerr << "n must be positive\n"; return 1;`。
 - **验证**：0 警告 0 错误；n=5 → `avg = 4.50` 退出码 0；n=0 / n=-3 → stderr 报错 + 退出码 1，全部通过。
 - **教学点**：裸 `throw;` 无异常在飞时 = terminate（看似崩溃）；报错退出标准式是 `std::cerr` + `return 非0`。
-- **结论**：M2 练习 1-3 全部通过 review ✅。进度三处已同步 + 已提交。
+- **结论**：M2 练习 1-3 全部通过 review ✅。
 - **下一步建议**：练习 4（`04_ref_or_ptr.cpp`：find 返回指针 / setMin 引用 / 3 思考题）→ 自评表 → 全 ✅ 进 M3。
 
 ### 2026-08-07 · 本机部署 + M2 练习 1-2 完成 ✅

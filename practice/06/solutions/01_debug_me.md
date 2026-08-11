@@ -43,7 +43,7 @@ Breakpoint 1, adjacent_sums(...) at 01_debug_me.cpp:18
 
 ## 修复 Fix
 
-把 `practice/06-1/01_debug_me_fixed.cpp` 里的循环条件改成 `i + 1 < n`（或 `i < n - 1`）：
+把 `practice/06/01_debug_me_fixed.cpp` 里的循环条件改成 `i + 1 < n`（或 `i < n - 1`）：
 
 ```cpp
 // 修复前 Before

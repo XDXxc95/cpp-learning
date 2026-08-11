@@ -64,7 +64,8 @@
   ```
 
 - 每节控制体量：一次会话一模块，宁可薄而精，不要一次铺完。
-- **markdownlint 约定（规则固化在 `.markdownlint.jsonc`）**：表格分隔行用 padded 风格 `| --- | --- |`（**不是** `|---|---|`）；表格内管道两侧有空格（全角字符如 `）` 也要隔开）；所有 fenced 代码块必须带语言标签（`cpp` / `bash` / `text`）。写文档直接照此，不要等 lint 报错再改。
+- **markdownlint 约定（规则固化在 `.markdownlint.jsonc`）**：仅两条——表格分隔行用 padded 风格 `| --- | --- |`（**不是** `|---|---|`）；表格内管道两侧有空格（全角字符如 `）` 也要隔开）；所有 fenced 代码块必须带语言标签（`cpp` / `bash` / `text`）。写文档直接照此，不要等 lint 报错再改。
+- **文档不强制行长等其它规则**（用户 2026-08-10 确认）：MD013 line-length 等告警对中文项目无意义（CJK 每字按 2 列宽，存量文档最长 300+ 视觉列），**文档以可读为准，忽略**；格式化规范只约束代码（`.clang-format` + `tools/format.*`）。
 
 ## 编译环境与约束（必须遵守）
 
@@ -96,5 +97,6 @@
 
 - 编译并运行：`tools/compile.sh <文件.cpp>`（Git Bash）或 `tools\compile.bat <文件.cpp>`（cmd）。**程序在独立弹窗里运行**（`start ... cmd /c ... & pause`，显示输出与退出码，按任意键后窗口自动关闭），不占用当前终端——这是为了让终端里的 Claude Code CLI 不被运行输出顶走。
 - 编译后进 gdb：`tools/gdb.sh <文件.cpp>`
-- 调试：VS Code F5 → cppdbg，`launch.json` 已设 `externalConsole: true`，程序 I/O 走独立控制台窗口；预编译任务 `reveal: never` 不抢焦点。调试器仍会弹出「调试控制台」面板（gdb 消息），属 VS Code 固有行为。
+- 格式化（LLVM 风格，项目适配版）：`tools/format.sh <文件.cpp>`（Git Bash）或 `tools\format.bat <文件.cpp>`（cmd），原地格式化；加 `--check` 只检查不改写（有不规范时退出码非 0）。风格配置在根目录 `.clang-format`：`BasedOnStyle: LLVM` + 指针/引用左对齐（保持项目 `int* p` 习惯）+ 中文注释不重排（防拆行损坏）。clang-format 定位：环境变量 `CLANG_FORMAT` > VS Code C/C++ 扩展内置（本机 22.1.3）> PATH。
+- 调试：VS Code F5 → cppdbg，`launch.json` 已设 `externalConsole: true`，程序 I/O 走独立控制台窗口；预编译任务 `reveal: never` 不抢焦点。调试器仍会弹出「调试控制台」面板（gdb 消息），属 VS Code 固有行为。VS Code 已开 `editor.formatOnType`，自动补全后按 `.clang-format` 即时套用 LLVM 风格。
 - 编译产物在 `build/`，随时可删（运行库 DLL 会被脚本自动补回）。

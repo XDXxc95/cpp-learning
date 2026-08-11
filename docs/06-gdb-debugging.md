@@ -33,13 +33,13 @@ gdb 不用改代码：在**任意行**停住，看那一刻的**所有变量**�
 **Git Bash：**
 
 ```bash
-bash tools/gdb.sh examples/06-1/01_debug_me.cpp
+bash tools/gdb.sh examples/06/01_debug_me.cpp
 ```
 
 **PowerShell / cmd（本机日常用这个）：**
 
 ```powershell
-tools\gdb.bat examples\06-1\01_debug_me.cpp
+tools\gdb.bat examples\06\01_debug_me.cpp
 ```
 
 **VS Code 任务（最省事）：** 打开目标 `.cpp` → 终端菜单 → 运行任务 → **「Debug current C++ file (gdb)」**，自动以项目目录跑 `gdb.bat`。
@@ -47,7 +47,7 @@ tools\gdb.bat examples\06-1\01_debug_me.cpp
 `.sh` 和 `.bat` 效果一样：自动带 `-g` 编译 → 进 gdb。也可以自己编译后直接进 gdb（PowerShell/cmd 用 `build.bat`，Git Bash 用 `build.sh`）：
 
 ```powershell
-tools\build.bat examples\06-1\01_debug_me.cpp   # 只编译到 build\
+tools\build.bat examples\06\01_debug_me.cpp   # 只编译到 build\
 gdb build\01_debug_me.exe
 ```
 
@@ -103,7 +103,7 @@ No symbol "year" in current context.            ← 局部变量随 main 销毁
 
 程序结束后 gdb 不退出：你可以 `b` 设新断点、`r` 重跑、看够了 `q`。**这正好解决「return 0 弹窗就关」的问题——gdb 自己就是那个不会关的容器。**
 
-## 代码示例 Examples → `examples/06-1/`
+## 代码示例 Examples → `examples/06/`
 
 - **`01_debug_me.cpp`** — 一个输出错误但**不崩不报警告**的程序。你的第一个 gdb 实战靶子。先别改它，用 gdb 找出病因（练习见下）。
 
@@ -116,9 +116,9 @@ No symbol "year" in current context.            ← 局部变量随 main 销毁
 5. 忘记 `-g` 编译 → gdb 说 `No symbol table`。用 `tools/gdb.sh` 不会踩。
 6. **单步走出 `main` 会跳到 `crtexe.c`**（MinGW CRT 启动文件，如 `...\mingw-w64-crt\crt\crtexe.c`）。因为 `main` 是被 `mainCRTStartup` 调用的——程序真正入口在 CRT 里，`main` 返回后控制权交回它，`ExitProcess` 收尾。**这不是 bug**。想看 main 结尾就停住（`Shift+F5` 停 / 在 `return 0` 前一行检查），不要用 `F10` 一步跨出 main。
 
-## 练习 Exercises → `practice/06-1/exercises.md`
+## 练习 Exercises → `practice/06/exercises.md`
 
-去练 `practice/06-1/exercises.md`。规则不变：**先自己动手**，卡住了再看 `solutions/`。
+去练 `practice/06/exercises.md`。规则不变：**先自己动手**，卡住了再看 `solutions/`。
 
 ## 自测 Self-Check
 
@@ -129,4 +129,4 @@ No symbol "year" in current context.            ← 局部变量随 main 销毁
 - [ ] 在修复后的版本上，用 gdb 验证输出正确
 - [ ] 会用 `bt` 说出「当前停在哪一层、谁调进来的」
 
-对照答案：`practice/06-1/solutions/01_debug_me.md`
+对照答案：`practice/06/solutions/01_debug_me.md`
