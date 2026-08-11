@@ -10,6 +10,25 @@
 
 int main() {
   // TODO: 你的实现（要求 1-4）
+  std::string s1 = "Hello";
+  std::string s2 = "World";
+  std::string s = s1 + s2;
+
+  std::cout << s << "\n";
+
+  std::cout << s2.substr(0, 3) << "\n";
+
+  auto pos = s1.find("lo");
+  if (pos == std::string::npos) {
+    std::cout << "not found!\n";
+  } else {
+    std::cout << pos << "\n";
+  }
+
+  std::string input;
+
+  std::getline(std::cin, input);
+  std::cout << "input : " << input << " length : " << input.size();
 
   return 0;
 }

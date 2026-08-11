@@ -11,5 +11,42 @@
 int main() {
   // TODO: 你的实现（要求 1-4）
 
+  std::vector<int> v;
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(2);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(3);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(5);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+
+  std::cout << "size : " << v.size() << "\n";
+  std::cout << "v[0] : " << v[0] << "\n";
+
+  for (auto vi : v) {
+    std::cout << vi << " ";
+  }
+  std::cout << "\n";
+
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(2);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(42);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+
+  std::cout << "before , capacity = " << v.capacity() << ", size = " << v.size() << "\n";
+  v.push_back(52);
+  std::cout << "after  , capacity = " << v.capacity() << ", size = " << v.size() << "\n"
+            << "\n";
+
   return 0;
 }

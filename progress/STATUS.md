@@ -8,17 +8,19 @@
 
 **正在做 In progress：**
 
-- **M3 · STL 容器与算法** —— 内容已生成 ✅（文档/4 示例/10 练习+答案，全部编译验证），**练习 1-10 待用户完成（A 热身 → B 核心 → C 迭代器/算法 → D 综合）**。
+- **M3 · STL 容器与算法** —— 内容已生成 ✅；**练习 1-4 已 review 通过**（A 热身 ①② vector/string 最小操作 + B 核心 ③④ vector 重写求平均/map 频率统计，编译 0 警告 + format 全过），**待完成 5-10**（⑤⑥ B 区 → ⑦⑧ C 迭代器/算法 → ⑨⑩ D 综合）。
 - **M6 · gdb 调试入门** —— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位（可随时并行练）。
 
 **下一步 Next：**
 
-1. **完成 M3 练习 1-10**（按 A 热身 → B 核心 → C 迭代器/算法 → D 综合 四层推进，题目见 `practice/03/exercises.md`）。
+1. **完成 M3 练习 5-10**：⑤ set 去重+binary_search ⑥ string 单词统计 ⑦ 迭代器专项 ⑧ `<algorithm>` 专项 ⑨ 词频 Top-K ⑩ 容器选型（题目见 `practice/03/exercises.md`）。
 2. 完成后填文末自评表 → 回来 review → 全 ✅ → 收尾 M3-1 高频容器 → 进 M4-1 面向对象核心。
 3. M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
 
 **已完成 Done：**
 
+- **M3 练习 1-4 review 通过 ✅（2026-08-11）**：A 热身（vector 容量翻倍观察 / string 四连）+ B 核心（vector 重写求平均含「对比 new[]/delete[]」注释 / map 频率统计含两思考题）；全程编译 0 警告 + format.sh --check 全过。
+- **文档同步 ✅（2026-08-11）**：修复 2026-08-11 重构后 5 处过期引用——`docs/03` 练习段 4→10 道 A-D 四层、`docs/06` 标题 M6-1→M6、`practice/06/exercises.md` 标题 + 两处 `examples/00-getting-started`→`examples/00` 路径、`examples/00/hello.cpp` 注释路径。
 - **M3 STL 容器与算法 —— 内容生成 ✅（2026-08-10）**：`docs/03-stl-containers-and-algorithms.md` + `examples/03/` 4 示例（01 vector / 02 string / 03 map_set / 04 algorithms，编译 0 警告 + 运行验证）+ `practice/03/exercises.md` + 4 骨架 + `solutions/`（4/4 编译 0 警告 + 用例全对）。覆盖 vector 自动内存管理 / string / map-set 有序查找 / 迭代器区间 `[begin,end)` / algorithm 常用算法 / 复杂度选型。
 - **M2 · 引用/指针/内存模型 —— 完成 ✅（2026-08-10）**：练习 1-4 全部 review 通过 + 自评全 ✅。练习 3 动态数组求平均（new[]/delete[] 配对、防御 n<=0、double 除法）；练习 4 find/setMin（指针返回 nullptr 表达「找不到」、引用就地修改 + 3 思考题，口诀「是否需要判断是否存在」）；练习 1 预测输出 / 练习 2 找 3 内存 bug 于 2026-08-07 通过。本机另有「判断引用 vs 指针」补课记录（见 PROGRESS）。
 - **格式化工具链（LLVM 风格）✅（2026-08-10，commit `b7f1abe`）**：`.clang-format` 项目适配版（LLVM 基础 + 指针/引用左对齐保持 `int* p` + 中文注释不重排 + 列宽 100）+ `tools/format.sh/.bat`（自动定位 clang-format：环境变量 > VS Code 扩展内置 22.1.3 > PATH）+ VS Code `defaultFormatter` 固定 C/C++ 扩展（消掉「选择格式化器」弹窗）。
