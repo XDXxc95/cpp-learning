@@ -1,7 +1,7 @@
 # M03 · STL 容器与算法 | STL Containers & Algorithms
 
 > 目标 Goals：掌握刷题和通用开发最常用的 STL——`vector` / `string` / `map` / `set`、迭代器、常用算法，并建立复杂度直觉 ｜ 预计 Est.：2~3 小时 ｜ 难度：★★☆
-
+>
 > 这是你 M2 之后最重要的模块：**大部分内存管理的痛苦，STL 容器替你包了**。M2 里你手动 `new[]`/`delete[]`，这里换 `std::vector` 一行声明。刷题（LeetCode 类）几乎全程在用容器和算法，本模块是 M7 算法专项的弹药库。
 
 ## 本节要点 Key Points
