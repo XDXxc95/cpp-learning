@@ -1,4 +1,4 @@
-// practice/03/solutions/02_frequency.cpp — 参考答案：map 频率统计
+// practice/03/solutions/04_frequency.cpp — 参考答案：map 频率统计
 #include <iostream>
 #include <map>
 

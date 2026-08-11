@@ -1,4 +1,4 @@
-// practice/03/01_vector_avg.cpp — M3 练习1：用 vector 重写「动态数组求平均」
+// practice/03/03_vector_avg.cpp — M3 练习3：用 vector 重写「动态数组求平均」
 // 要求：
 //   1. 输入 n，std::vector<double> a(n) 造出 n 个元素
 //   2. 填值 a[i] = (i + 1) * 1.5

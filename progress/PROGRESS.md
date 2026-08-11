@@ -4,6 +4,18 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-11 · M3 练习按「由浅入深 + 全面覆盖」分层重构（4 → 10 题）
+
+- **需求**：用户定练习设计原则——数量不设限，按学习深入分层（先基础热身、再核心应用、后综合/学后练习），全面覆盖该节知识。已写入 CLAUDE.md 文档生成规范 + 记忆。
+- **改动**：`practice/03/` 重构为 **A 热身（2）→ B 核心（4）→ C 迭代器/算法（2）→ D 综合/学后（2）** 四层共 10 题：
+  - A：01_vector_warmup（含 capacity 翻倍观察）、02_string_warmup；
+  - B：原 4 题平移重编号（03_vector_avg / 04_frequency / 05_dedup / 06_string_ops），04 补问「`map[key]++` 键不存在时会发生什么」；
+  - C：07_iterators（`[begin,end)` 左闭右开 / 反向 / distance）、08_algorithms（sort/accumulate/minmax/count/reverse）；
+  - D：09_word_freq_top（string+map+vector+sort 综合，LeetCode 前 K 高频词同款）、10_container_choice（选型设计题，补复杂度/选型零覆盖）。
+- **验证**：10 骨架 + 10 答案全部编译 0 警告；运行验证 capacity 1→2→4、distance=5、词频 `a 3 / cat 2 / dog 1` 等正确。
+- **结论**：M3 知识覆盖闭环（vector/string/map/set/迭代器/algorithm/复杂度选型全有对应练习）。
+- **下一步建议**：用户从 A 区热身做起 → 逐层推进 → 完成 10 题回来 review + 自评 → 全 ✅ 进 M4。
+
 ### 2026-08-11 · 双端同步：合并本机与远端的并行会话
 
 - **需求**：用户「同步远端的代码」。发现本机 main 与 origin/main 各领先 5 个提交——本机为当天下午（13:19–14:36）会话，远端为当晚（22:58–23:50）另一台机器上的会话，两者并行做了同一批里程碑。

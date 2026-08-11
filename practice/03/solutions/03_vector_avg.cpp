@@ -1,4 +1,4 @@
-// practice/03/solutions/01_vector_avg.cpp — 参考答案：vector 重写动态数组求平均
+// practice/03/solutions/03_vector_avg.cpp — 参考答案：vector 重写动态数组求平均
 #include <iomanip>
 #include <iostream>
 #include <vector>

@@ -1,4 +1,4 @@
-// practice/03/solutions/03_dedup.cpp — 参考答案：set 去重 + binary_search 查找
+// practice/03/solutions/05_dedup.cpp — 参考答案：set 去重 + binary_search 查找
 #include <algorithm>
 #include <iostream>
 #include <set>
