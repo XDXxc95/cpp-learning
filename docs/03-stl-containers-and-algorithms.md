@@ -146,7 +146,14 @@ for (auto& kv : score) { kv.first; kv.second; }   // 遍历，按键升序
 
 ## 练习 Exercises → `practice/03/exercises.md`
 
-4 道练习，从「vector 重写 M2」到「map 频率 / set 去重 / string 处理」。先自己写，再对照 `practice/03/solutions/`。
+**10 道练习**，按「由浅入深」分四层推进（先自己写，再对照 `practice/03/solutions/`）：
+
+- **A 热身 Basic**：① vector 最小操作（观察容量翻倍）② string 最小操作
+- **B 核心 Core**：③ vector 重写 M2 求平均 ④ map 频率统计 ⑤ set 去重 + binary_search ⑥ string 单词统计
+- **C 迭代器/算法 Iterator & Algorithm**：⑦ 迭代器专项（`[begin,end)` / 反向 / distance）⑧ `<algorithm>` 常用算法
+- **D 综合 Capstone**：⑨ 词频 Top-K（LeetCode「前 K 高频词」同款）⑩ 容器选型设计题
+
+做完填文末自评表，回来 review。
 
 ## 自测 Self-Check
 

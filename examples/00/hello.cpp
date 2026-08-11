@@ -1,6 +1,6 @@
 // hello.cpp — 环境验证：编译 → 运行 → 退出码
 // Environment check: compile -> run -> exit code
-// 编译运行 Compile & run: tools/compile.sh examples/00-getting-started/hello.cpp
+// 编译运行 Compile & run: tools/compile.sh examples/00/hello.cpp
 
 #include <iostream>
 #include <string>

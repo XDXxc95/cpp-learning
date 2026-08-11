@@ -1,4 +1,4 @@
-# M6-1 · 练习 Exercises — gdb 调试入门
+# M6 · 练习 Exercises — gdb 调试入门
 
 > 规则 Rules：先自己写/自己动手，卡住再看 `solutions/`。
 > 环境 Env：在**独立终端**跑（别用 Claude Code 所在的终端）。先 `cd D:\XC_workspace\cpp-learning`；
@@ -6,9 +6,9 @@
 
 ## 练习 1 · 基础走读（hello.cpp）— 5 分钟
 
-用 `examples/00-getting-started/hello.cpp` 练手感：
+用 `examples/00/hello.cpp` 练手感：
 
-1. `bash tools/gdb.sh examples/00-getting-started/hello.cpp`
+1. `bash tools/gdb.sh examples/00/hello.cpp`
 2. `break main` → `run` → 停在 main 第几行？
 3. `next` 两次，`print year`——输出是 2026 吗？为什么？
 4. 继续 `next` 到程序跑完，观察：程序结束后 gdb 还在吗？此时 `print year` 报什么？为什么？

@@ -1,4 +1,4 @@
-# M6-1 · gdb 调试入门 | GDB Debugging Basics
+# M6 · gdb 调试入门 | GDB Debugging Basics
 
 > 目标 Goals：会用 gdb 设断点、单步、看变量、查调用栈，独立揪出一个隐蔽 bug ｜
 > 预计时间 Est. time：45–60 分钟 ｜ 难度 Difficulty：⭐⭐
