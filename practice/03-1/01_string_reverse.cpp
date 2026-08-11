@@ -9,5 +9,25 @@ int main() {
   //   2. 空格个数（遍历数 ' '）
   //   3. 反转后的字符串（倒序拼到新 string）
 
+  std::string s;
+  std::getline(std::cin, s);
+
+  size_t length = s.size();
+  std::cout << "length : " << length << "\n";
+
+  int spaceCount = 0;
+  for (auto ch : s) {
+    if (ch == ' ') {
+      spaceCount++;
+    }
+  }
+  std::cout << "spaceCount : " << spaceCount << "\n";
+
+  std::string reversed;
+  for (size_t i = length ; i > 0; --i) {
+    reversed.push_back(s[i-1]);
+  }
+  std::cout << "reversed : " << reversed << "\n";
+
   return 0;
 }
