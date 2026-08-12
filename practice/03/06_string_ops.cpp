@@ -4,10 +4,26 @@
 // 提示：数单词用 <sstream> 的 std::istringstream（>> 按空白切分）；
 //       反转用反向迭代器 std::string rev(line.rbegin(), line.rend());
 #include <iostream>
+#include <sstream>
 #include <string>
 
 int main() {
-  // TODO: 你的实现
+  std::string s;
+  std::getline(std::cin, s);
+
+  std::istringstream iss(s);
+
+  std::string word, longest;
+  int count = 0;
+  while (iss >> word) {
+    count++;
+    if (word.length() > longest.length()) {
+      longest = word;
+    }
+  }
+  std::string reversed(s.rbegin(), s.rend());
+
+  std::cout << count << "\n" << longest << "\n" << reversed << "\n";
 
   return 0;
 }

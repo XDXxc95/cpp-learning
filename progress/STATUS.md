@@ -4,21 +4,22 @@
 > 配套：`ROADMAP.md`（全局路线）/ `progress/PROGRESS.md`（历史日志）。
 > 三处保持同步，本文件是「现在进行到哪」的单一答案。
 
-## 当前状态 Current Status（截至 2026-08-11）
+## 当前状态 Current Status（截至 2026-08-12）
 
 **正在做 In progress：**
 
-- **M3 · STL 容器与算法** —— 内容已生成 ✅；**练习 1-4 已 review 通过**（A 热身 ①② vector/string 最小操作 + B 核心 ③④ vector 重写求平均/map 频率统计，编译 0 警告 + format 全过），**待完成 5-10**（⑤⑥ B 区 → ⑦⑧ C 迭代器/算法 → ⑨⑩ D 综合）。
+- **M3 · STL 容器与算法** —— 内容已生成 ✅；**练习 1-6 已 review 通过**（A 热身 ①② + B 核心 ③-⑥ vector 重写求平均/map 频率/set 去重/string 单词统计，编译 0 警告 + format 全过），**待完成 7-10**（⑦⑧ C 迭代器/算法 → ⑨⑩ D 综合）。
 - **M6 · gdb 调试入门** —— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位（可随时并行练）。
 
 **下一步 Next：**
 
-1. **完成 M3 练习 5-10**：⑤ set 去重+binary_search ⑥ string 单词统计 ⑦ 迭代器专项 ⑧ `<algorithm>` 专项 ⑨ 词频 Top-K ⑩ 容器选型（题目见 `practice/03/exercises.md`）。
+1. **完成 M3 练习 7-10**：⑦ 迭代器专项 ⑧ `<algorithm>` 专项 ⑨ 词频 Top-K ⑩ 容器选型（题目见 `practice/03/exercises.md`）。
 2. 完成后填文末自评表 → 回来 review → 全 ✅ → 收尾 M3-1 高频容器 → 进 M4-1 面向对象核心。
 3. M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
 
 **已完成 Done：**
 
+- **M3 练习 5-6 review 通过 ✅（2026-08-12）**：B 核心收尾（⑤ set 去重+binary_search 输出 `1 2 3 4`/`3 in`，⑥ string 单词统计 5/coding/反转句，用例全对）。可改进点已提示：05 的 `std::sort` 冗余（set 本就有序，拷出已升序）、注释答「为什么」而非复述结论、`bool find` 变量名；06 空输入防御可选。05/06 未强制返工。
 - **M3 练习 1-4 review 通过 ✅（2026-08-11）**：A 热身（vector 容量翻倍观察 / string 四连）+ B 核心（vector 重写求平均含「对比 new[]/delete[]」注释 / map 频率统计含两思考题）；全程编译 0 警告 + format.sh --check 全过。
 - **文档同步 ✅（2026-08-11）**：修复 2026-08-11 重构后 5 处过期引用——`docs/03` 练习段 4→10 道 A-D 四层、`docs/06` 标题 M6-1→M6、`practice/06/exercises.md` 标题 + 两处 `examples/00-getting-started`→`examples/00` 路径、`examples/00/hello.cpp` 注释路径。
 - **M3 STL 容器与算法 —— 内容生成 ✅（2026-08-10）**：`docs/03-stl-containers-and-algorithms.md` + `examples/03/` 4 示例（01 vector / 02 string / 03 map_set / 04 algorithms，编译 0 警告 + 运行验证）+ `practice/03/exercises.md` + 4 骨架 + `solutions/`（4/4 编译 0 警告 + 用例全对）。覆盖 vector 自动内存管理 / string / map-set 有序查找 / 迭代器区间 `[begin,end)` / algorithm 常用算法 / 复杂度选型。
