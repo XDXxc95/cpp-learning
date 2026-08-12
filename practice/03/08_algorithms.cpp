@@ -13,6 +13,37 @@
 
 int main() {
   // TODO: 你的实现（要求 1-5）
+  int n = 0;
+  std::cin >> n;
+
+  std::vector<int> v;
+  v.reserve(n);
+
+  for (int i = 0; i < n; i++) {
+    int input = 0;
+    std::cin >> input;
+    v.push_back(input);
+  }
+
+  std::sort(v.begin(), v.end());
+  for (auto it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << " ";
+  }
+  std::cout << "\n";
+
+  std::cout << std::accumulate(v.begin(), v.end(), 0) << "\n";
+
+  std::cout << *std::min_element(v.begin(), v.end()) << "\n";
+  std::cout << *std::max_element(v.begin(), v.end()) << "\n";
+
+  int target = 0;
+  std::cin >> target;
+  std::cout << std::count(v.begin(), v.end(), target) << "\n";
+
+  std::reverse(v.begin(), v.end());
+  for (auto it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << " ";
+  }
 
   return 0;
 }

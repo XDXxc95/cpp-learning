@@ -6,12 +6,37 @@
 //   2. std::distance(v.begin(), v.end()) 求长度，打印（应等于 n）
 //   3. 体会左闭右开：打印 *(v.end() - 1)（最后一个元素）——注意 end() 本身不指向元素
 //   4. 反向迭代器 rbegin/rend 打印倒序
-// 注释里回答：为什么循环条件写成 it != v.end() 而不是 it <= v.end()？
+// 注释里回答：为什么循环条件写成 it != v.end() 而不是 it <= v.end()？ 这是迭代器，是指针，直接比较是比较地址值，不一定连续或者end比之前的都大。另外end是哨兵，不是实际的最后一个位置，也不能使用=
 #include <iostream>
 #include <vector>
 
 int main() {
-  // TODO: 你的实现（要求 1-4）
+  int n = 0;
+  std::cin >> n;
+
+  std::vector<int> v;
+  v.reserve(n);
+  //这样写和直接 std::vector<int> v(n); 那个更好？为什么？
+
+  for (int i = 0; i < n; i++) {
+    int input = 0;
+    std::cin >> input;
+    v.push_back(input);
+  }
+
+  for (auto it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it << " ";
+  }
+  std::cout << "\n";
+
+  std::cout << std::distance(v.begin(), v.end()) << "\n";
+
+  std::cout << *(v.end() - 1) << "\n";
+
+  for (auto it = v.rbegin(); it != v.rend(); ++it) {
+    std::cout << *it << " ";
+  }
+  std::cout << "\n";
 
   return 0;
 }
