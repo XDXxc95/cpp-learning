@@ -40,7 +40,9 @@ int main() {
     return a.first < b.first;
   });
 
-  size_t length = std::min<size_t>(output.size(), 3);
+  constexpr size_t MAX_OUTPUT_COUNTS = 3;
+
+  size_t length = std::min(output.size(), MAX_OUTPUT_COUNTS);
   for (size_t i = 0; i < length; i++) {
     std::cout << output[i].first << " " << output[i].second << "\n";
   }
