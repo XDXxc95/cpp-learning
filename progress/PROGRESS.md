@@ -4,6 +4,16 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-14 · M3-1 高频容器内容生成（文档/示例/10 练习全就绪）
+
+- **需求**：用户「继续」→ 确认从 M3-1 高频容器开始（AskUserQuestion 三选一：M3-1 / M6 gdb / 重看 M3 收官题⑩）。
+- **文档** `docs/03-1-high-frequency-containers.md`：unordered_map/set（哈希表，平均 O(1)，**无序**，与 map/set 红黑树 O(log n) 对比）、priority_queue（堆，默认最大堆、`greater<int>` 最小堆、Top-K 最小堆模式 O(n log k)）、stack/queue（容器适配器，LIFO/FIFO，无迭代器、**C++17 无 clear()**）、deque（分段数组，两端 O(1)，随机访问 O(1)，中间插入 O(n)）。复杂度速查表 + 选型口诀升级 + 9 条易错点（重点：`unordered_map[key]` 照样自动插默认值、priority_queue 默认最大堆 top 是最大、`comp(a,b)=true` 表示 a 优先级**更低**、平均 O(1)≠最坏 O(1)）。
+- **示例** `examples/03-1/` 4 个：01 unordered_map_set（频率计数/存在性/无序演示）、02 priority_queue（最大堆出队序 `9 6 5 4 3 2 1 1`、最小堆 top=1、Top-K → `5 6 9`）、03 stack_queue（LIFO `3 2 1` / FIFO `1 2 3`、front/back）、04 deque（双端 pop、随机访问、vector 头插 O(n) vs deque O(1)）。**编译 0 警告 + 运行验证 + format 全过**。
+- **练习** `practice/03-1/exercises.md` + 10 参考答案：**A 热身** ① unordered_map 频率（答与 map 顺序差异）② stack 最小操作 ③ queue 最小操作 ④ priority_queue 最大/最小堆；**B 核心** ⑤ unordered_set 去重+存在性 ⑥ 括号匹配（**LeetCode 20**，stack）⑦ 报数出列（queue 约瑟夫环，n=5 k=3 → `3 1 5 2 4`）⑧ 前 K 大（**最小堆 size=k，O(n log k)**）⑨ deque 回文检查；**C 综合** ⑩ 前 K 高频词（**堆解法**，unordered_map + priority_queue 自定义比较器——M3 练习 9 的 sort 版换成堆版，LeetCode 347 思路）。**10/10 编译 0 警告 + 用例全对 + format 全过**。
+- **format 备注**：clang-format 22 对「行尾中文注释」的 `--check` 误报在本模块 14 个新文件上同样出现（已有 M3 文件也一样，属项目已知状态）→ 跑 `format.sh -i` 后全部 `--check` 通过，格式化后重编译 0 警告 + 用例回归全对。
+- **结论**：M3-1 内容交付完成，等用户练习。
+- **下一步建议**：用户写 M3-1 练习 A→B→C → 回来 review（重点盯 ⑩ 自定义比较器方向、⑧ 复杂度对比注释）→ 自评表全 ✅ 收官 M3-1 → 进 M4-1 面向对象核心。
+
 ### 2026-08-14 · M3 收官：练习 10 容器选型 review 通过 + 自评全 ✅
 
 - **需求**：用户「继续」→ 练习 10 已作答 → 一轮返工 → review 通过。
