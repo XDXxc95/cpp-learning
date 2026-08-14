@@ -4,6 +4,18 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-14 · M3 练习 9 review 通过（D 区 ⑨ 词频 Top-K）
+
+- **需求**：用户「继续」→ 已完成练习 9 → 两轮返工 → 「review」通过。
+- **练习9 词频 Top-K ✅**：getline+istringstream 分词、`map` 计数、`vector<pair>` 收集、`sort`+lambda 复合比较（次数降序优先、并列按字典序升序），5 用例全对——示例 `a cat a dog a cat` → `a 3/cat 2/dog 1`；6 词句只打前 3（`the 3/brown 1/dog 1`）；并列字典序正确（brown<dog<fox…）；边界「不足 3 词全打」（`hello` → 1 行）正确。编译 0 警告 + format 全过。
+- **首轮返工（打印范围）**：原实现遍历打印**全部**词（`i < output.size()`），题目要求「次数最多的 **3 个**」——示例恰好 3 词未暴露，6 词用例暴露。→ 改 `std::min(output.size(), 3)`，思路对，但**编译失败**：
+  - 报错 `no matching function for call to 'min(size_type, int)'`——`std::min` 是模板，两参数须同类型；`size()` 返回 `size_t`（`unsigned long long`）vs 字面量 `3`（`int`），模板推导**不做隐式转换** → 推导冲突编译不过。
+  - 这是经典坑：`size_t` 与 `int` 混用（`-Wsign-compare` 警告的根源，此处更直接编译错误）。
+  - 用户采用方案 `std::min<size_t>(output.size(), 3)`（显式指定模板类型，`3` 隐式转 `size_t`），编译通过 0 警告。备选方案已讲：循环条件 `i < 3 && i < output.size()`（短路，类型问题消失）。
+- **残留（不影响通过）**：骨架 TODO 注释未删（第三次提示）、变量名 `recode` 可改 `freq`（不强制）。
+- **结论**：M3 十个练习只剩 ⑩ 容器选型。
+- **下一步建议**：⑩ 容器选型（注释作答）→ 自评表 → 全 ✅ 收尾 M3-1 高频容器 → 进 M4-1。
+
 ### 2026-08-13 · M3 练习 7-8 review 通过（C 区收尾）+ 同步 + 上传进度
 
 - **需求**：用户「同步一下」（拉取另一端 17 个提交）→「继续」做 M3 练习 7-10 → 本轮完成 7-8 并 review 通过 →「上传进度」提交推送。

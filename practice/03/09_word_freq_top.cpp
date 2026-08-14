@@ -18,6 +18,32 @@
 
 int main() {
   // TODO: 你的实现（要求 1-3）
+  std::string s;
+  std::getline(std::cin, s);
+
+  std::istringstream iss(s);
+  std::string word;
+  std::map<std::string, int> recode;
+  while (iss >> word) {
+    recode[word]++;
+  }
+
+  std::vector<std::pair<std::string, int>> output;
+  for (const auto& it : recode) {
+    output.push_back({it.first, it.second});
+  }
+
+  std::sort(output.begin(), output.end(), [](const auto& a, const auto& b) {
+    if (a.second != b.second) {
+      return a.second > b.second;
+    }
+    return a.first < b.first;
+  });
+
+  size_t length = std::min<size_t>(output.size(), 3);
+  for (size_t i = 0; i < length; i++) {
+    std::cout << output[i].first << " " << output[i].second << "\n";
+  }
 
   return 0;
 }
