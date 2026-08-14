@@ -4,6 +4,14 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-14 · 会话收尾：练习 9 constexpr 收口 + 文档沉淀 + settings 误操作撤销
+
+- **练习 9 最终收口 ✅**：用户主动把 `std::min<size_t>` 升级为文档推荐的 `constexpr size_t MAX_OUTPUT_COUNTS = 3` + `std::min(output.size(), MAX_OUTPUT_COUNTS)`（K 有名字 + 类型统一，`<size_t>` 都不用写）——学以致用。编译 0 警告 + 3 用例全对 + format 通过（仅修 1 个尾随空格）。commit `97f40a6`。
+- **文档沉淀 ✅**：把「`size_t` vs `int` 模板推导坑」写入 `docs/03` 易错点第 9 条（含三种修法优劣对照表 + 与第 7 条 `-Wsign-compare` 同源交叉引用），自测区补一问。commit `b1ac848`。
+- **误操作撤销 ✅**：用户确认 `.vscode/settings.json` 的 `C_Cpp.errorSquiggles: disabled` 是误操作 → `git reset --hard HEAD~1` 删除 commit `d36a3a0`，文件恢复原样（波浪线保持启用）。未推送的本地提交，历史干净。
+- **练习 10 状态**：仍未写（骨架原样）。M3 剩最后一题。
+- **下一步建议**：⑩ 容器选型（注释作答）→ 自评表 → 全 ✅ 收尾 M3-1 高频容器 → 进 M4-1。
+
 ### 2026-08-14 · M3 练习 9 review 通过（D 区 ⑨ 词频 Top-K）
 
 - **需求**：用户「继续」→ 已完成练习 9 → 两轮返工 → 「review」通过。
