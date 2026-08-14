@@ -4,6 +4,14 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-14 · M3 收官：练习 10 容器选型 review 通过 + 自评全 ✅
+
+- **需求**：用户「继续」→ 练习 10 已作答 → 一轮返工 → review 通过。
+- **练习10 容器选型 ✅（M3 收官题）**：5 场景注释作答。首轮：A set（自动排序+去重 O(log n)）满分；B map 字典序遍历对，但复杂度标「1」不准（map 插入 O(log n)，n 词 O(n log n)；O(1) 是 unordered_map 的均摊插入）；C vector 对，补「扩容 O(n)」→ 均摊 O(1)；D 只答 getline → 补全三操作 `+=`/`append` 拼接、`find`+`npos` 找子串、`getline` 读行；E 核心坑：题面「二分查找」指向 `std::binary_search`，**要求随机访问迭代器**，set（红黑树）迭代器不满足 → 标准组合 vector 收集 → sort → unique 去重 → binary_search。返工补齐 B/C/D/E 后通过。编译 0 警告 + 运行正常。
+- **自评表全 ✅**：6 项（vector / string / map-set / 迭代器 / algorithm / 综合选型）用户口头确认全部熟练，已代填进 `practice/03/exercises.md`。
+- **结论**：**M3 STL 容器与算法 10/10 全部完成，模块收官**。练习 1-4（A/B 热身核心）、5-6（B 核心）、7-8（C 迭代器/算法）、9（D 词频 Top-K）、10（D 选型收口）历次 review 全过。
+- **下一步建议**：M3-1 高频容器（unordered_map/set、priority_queue、stack/queue、deque）→ 生成文档/示例/练习 → 之后 M4-1 面向对象核心。
+
 ### 2026-08-14 · 会话收尾：练习 9 constexpr 收口 + 文档沉淀 + settings 误操作撤销
 
 - **练习 9 最终收口 ✅**：用户主动把 `std::min<size_t>` 升级为文档推荐的 `constexpr size_t MAX_OUTPUT_COUNTS = 3` + `std::min(output.size(), MAX_OUTPUT_COUNTS)`（K 有名字 + 类型统一，`<size_t>` 都不用写）——学以致用。编译 0 警告 + 3 用例全对 + format 通过（仅修 1 个尾随空格）。commit `97f40a6`。
