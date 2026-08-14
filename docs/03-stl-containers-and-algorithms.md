@@ -143,6 +143,15 @@ for (auto& kv : score) { kv.first; kv.second; }   // 遍历，按键升序
 6. **vector 迭代器在插入/删除后可能失效**——边遍历边删要小心。
 7. **下标遍历用 `size_t`**——`int i` 和 `v.size()` 比会触发 `-Wsign-compare` 警告。
 8. **`getline` 和 `>>` 混用**——`>>` 后留的换行符会被 `getline` 读到，要先 `std::cin.ignore()`。
+9. **`std::min` 等模板函数要求两参数同类型（2026-08-14 练习 9 实战踩坑）**——`std::min(output.size(), 3)` 直接编译失败：`size()` 返回 `size_t`（无符号 64 位），`3` 是 `int`（有符号 32 位），**模板参数推导不做隐式转换**，两实参类型不一致 → 推导冲突 → `no matching function`。这与第 7 条同源：**`size_t` 与 `int` 混用是 C++ 经典坑**（比警告更狠时直接编译错）。三种修法对比：
+
+   | 写法 | 优劣 |
+   | --- | --- |
+   | `for (size_t i = 0; i < 3 && i < v.size(); i++)` | 类型问题整个消失，刷题最省心；缺点：上限 3 散落在循环条件里，改 K 要动循环 |
+   | `std::min<size_t>(v.size(), 3)` | 显式指定模板类型，语义集中一行；缺点：要懂「模板显式参数」，漏写 `<size_t>` 就编译错 |
+   | `constexpr size_t K = 3; std::min(v.size(), K)` | **最推荐**：K 有名字且类型统一，两参同类型连 `<size_t>` 都不用写，可维护性最好；工程代码标准写法 |
+
+   本质：方案 1「约束循环」，方案 2/3「先算边界再用」；性能三者完全相同（`std::min` 内联）。
 
 ## 练习 Exercises → `practice/03/exercises.md`
 
@@ -161,3 +170,4 @@ for (auto& kv : score) { kv.first; kv.second; }   // 遍历，按键升序
 - `score["Tom"]` 在 Tom 不存在时会做什么？判断存在应该用什么？
 - `binary_search` 和 `find` 各需要什么前提？各自复杂度？
 - 一个数出现次数最多、要去重、要按键查值——分别该用什么容器？
+- `std::min(v.size(), 3)` 为什么编译不过？怎么修？（三种写法各自优劣见「易错点」第 9 条）
