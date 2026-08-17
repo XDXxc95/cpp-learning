@@ -7,12 +7,27 @@
 //
 // 注释里回答：
 //   和 M3 练习 4 的 map 版本相比，输出顺序为什么可能不一样？把 unordered_map 换回 map 会怎样？
+//   a:因为unordered_map 的 key 使用了 hash，会计算key的hash，直接放置，不会像map要更新红黑树节点 复杂度近似O(1) vs O(nlog)。换回map就有升序了。
 //
 // 完整题目见 practice/03-1/exercises.md；先自己写，再对照 solutions/01_unordered_freq.cpp
 #include <iostream>
 #include <unordered_map>
 
 int main() {
-  // TODO: 你的实现
+  int n = 0;
+  std::cin >> n;
+
+  std::unordered_map<int, int> m;
+
+  for (int i = 0; i < n; i++) {
+    int input = 0;
+    std::cin >> input;
+    m[input]++;
+  }
+
+  for (const auto& i : m) {
+    std::cout << i.first << " " << i.second << "\n";
+  }
+
   return 0;
 }

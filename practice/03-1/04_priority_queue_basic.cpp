@@ -7,7 +7,7 @@
 //
 // 注释里回答：
 //   默认 priority_queue 的 top() 返回最大还是最小？怎么把它变成最小堆？（写全三个模板参数）
-//
+//  最大。 写全三个模板参数。最后一个使用 std::greater  比较器。 std::priority_queue<int, std::vector<int>, std::greater<int>>
 // 完整题目见 practice/03-1/exercises.md；先自己写，再对照 solutions/04_priority_queue_basic.cpp
 #include <functional>
 #include <iostream>
@@ -15,6 +15,29 @@
 #include <vector>
 
 int main() {
-  // TODO: 你的实现
+  std::vector<int> v = {3, 1, 4, 1, 5, 9, 2, 6};
+
+  std::priority_queue<int> pq;
+  for (const auto& x : v) {
+    pq.push(x);
+  }
+
+  while (!pq.empty()) {
+    std::cout << pq.top() << " ";
+    pq.pop();
+  }
+  std::cout << "\n";
+
+  std::priority_queue<int, std::vector<int>, std::greater<int>> gq;
+  for (const auto& x : v) {
+    gq.push(x);
+  }
+
+  while (!gq.empty()) {
+    std::cout << gq.top() << " ";
+    gq.pop();
+  }
+  std::cout << "\n";
+
   return 0;
 }

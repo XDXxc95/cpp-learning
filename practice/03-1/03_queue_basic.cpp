@@ -7,12 +7,24 @@
 //
 // 注释里回答：
 //   front() / back() 各指哪里？和 stack 只有一个 top() 有什么区别？
+//   queue 第一个和最后一个。首尾。 队列出口入口是两个，所以有两个取值的方式，stack出口入口是一个，所以只有一个top/
 //
 // 完整题目见 practice/03-1/exercises.md；先自己写，再对照 solutions/03_queue_basic.cpp
 #include <iostream>
 #include <queue>
 
 int main() {
-  // TODO: 你的实现
+  std::queue<int> q;
+  q.push(1);
+  q.push(2);
+  q.push(3);
+
+  std::cout << q.front() << " " << q.back() << "\n";
+
+  while (!q.empty()) {
+    std::cout << q.front() << " ";
+    q.pop();
+  }
+
   return 0;
 }
