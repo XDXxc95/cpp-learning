@@ -4,6 +4,14 @@
 
 ## 会话记录 Sessions
 
+### 2026-08-19 · M3-1 练习 05 review 通过
+
+- **需求**：用户完成练习 05 `unordered_set` 去重与存在性判断后请求 review 并上传。
+- **实现**：使用 `unordered_set<int>` 插入并去重；输出 `dedup count` 与全部元素；使用 `find()` 判断 target 是否存在；补充 `set` 与 `unordered_set` 的选型及复杂度说明。
+- **验证**：target 存在、target 不存在、全部输入重复 3 组用例均正确；`tools/build.sh` 编译通过，`-Wall -Wextra` 0 警告；`tools/format.sh --check` 通过。
+- **结论**：B 区练习 05 review 通过 ✅。
+- **下一步**：完成 B 区 06-09（括号匹配、约瑟夫环、前 K 大、deque 回文），再 review C 区综合题 10。
+
 ### 2026-08-17 · M3-1 练习 1-4 review 通过（A 区热身收官）
 
 - **需求**：用户「继续」→ 选「写 M3-1 练习」→ 写完 A 区后说「1-4 还没有 review」→ 逐题 review。
