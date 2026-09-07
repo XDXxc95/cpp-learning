@@ -19,27 +19,32 @@ int main() {
   int k = 0;
   std::cin >> n >> k;
 
+  if (n <= 0 || k <= 0) {
+    return 0;
+  }
+
   std::queue<int> q;
   for (int i = 0; i < n; i++) {
     q.push(i + 1);
   }
 
+  bool first = true;
   while (!q.empty()) {
-    size_t count = k;
-    if (count > q.size()) {
-      count %= q.size();
-    }
-    if (count == 0) {
-      count = q.size();
-    }
+    const std::size_t steps = (static_cast<std::size_t>(k) - 1) % q.size();
 
-    for (size_t i = 0; i < count - 1; i++) {
+    for (std::size_t i = 0; i < steps; ++i) {
       q.push(q.front());
       q.pop();
     }
-    std::cout << q.front() << " ";
+    if (!first) {
+      std::cout << ' ';
+    }
+    std::cout << q.front();
+    first = false;
     q.pop();
   }
+
+  std::cout << '\n';
 
   return 0;
 }
