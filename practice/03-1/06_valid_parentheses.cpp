@@ -18,7 +18,64 @@
 #include <stack>
 #include <string>
 
+int isContain(const char& in) {
+  int res = 0;
+  if (in == ')' || in == ']' || in == '}') {
+    res = 2;
+  } else if (in == '(' || in == '[' || in == '{') {
+    res = 1;
+  }
+  return res;
+}
+
+bool isMatch(char left, char right) {
+  bool res = false;
+  if ((left == '(' && right == ')') || (left == '[' && right == ']') ||
+      (left == '{' && right == '}')) {
+    res = true;
+  }
+  return res;
+}
+
 int main() {
-  // TODO: 你的实现
+  std::string s;
+  std::getline(std::cin, s);
+
+  std::string valid = "valid";
+  std::string invalid = "invalid";
+
+  std::stack<char> tempChecker;
+
+  bool isvalid = true;
+
+  for (size_t i = 0; i < s.size(); i++) {
+    char in = s[i];
+    if (isContain(in) == 1) {
+      tempChecker.push(in);
+    } else if (isContain(in) == 2) {
+      if (tempChecker.empty()) {
+        isvalid = false;
+        break;
+      } else {
+        if (isMatch(tempChecker.top(), in)) {
+          tempChecker.pop();
+        } else {
+          isvalid = false;
+          break;
+        }
+      }
+    }
+  }
+
+  if (!tempChecker.empty() && isvalid) {
+    isvalid = false;
+  }
+
+  if (isvalid) {
+    std::cout << valid << "\n";
+  } else {
+    std::cout << invalid << "\n";
+  }
+
   return 0;
 }
