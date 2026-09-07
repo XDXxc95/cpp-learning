@@ -15,6 +15,31 @@
 #include <queue>
 
 int main() {
-  // TODO: 你的实现
+  int n = 0;
+  int k = 0;
+  std::cin >> n >> k;
+
+  std::queue<int> q;
+  for (int i = 0; i < n; i++) {
+    q.push(i + 1);
+  }
+
+  while (!q.empty()) {
+    size_t count = k;
+    if (count > q.size()) {
+      count %= q.size();
+    }
+    if (count == 0) {
+      count = q.size();
+    }
+
+    for (size_t i = 0; i < count - 1; i++) {
+      q.push(q.front());
+      q.pop();
+    }
+    std::cout << q.front() << " ";
+    q.pop();
+  }
+
   return 0;
 }
