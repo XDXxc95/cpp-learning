@@ -14,6 +14,33 @@
 #include <string>
 
 int main() {
-  // TODO: 你的实现
+  std::string s;
+  std::getline(std::cin, s);
+
+  bool isPalindrome = true;
+  if (s.size() <= 1) {
+    isPalindrome = true;
+  } else {
+    std::deque<char> dq;
+    for (size_t i = 0; i < s.size(); i++) {
+      dq.push_back(s[i]);
+    }
+
+    while (dq.size() > 1) {
+      if (dq.front() != dq.back()) {
+        isPalindrome = false;
+        break;
+      }
+      dq.pop_front();
+      dq.pop_back();
+    }
+  }
+
+  if (isPalindrome) {
+    std::cout << "palindrome\n";
+  } else {
+    std::cout << "not palindrome\n";
+  }
+
   return 0;
 }
