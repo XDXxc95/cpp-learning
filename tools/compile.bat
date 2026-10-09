@@ -19,6 +19,18 @@ if not exist "%SRC%" (
   echo Error: source file not found: %~1
   exit /b 1
 )
+rem Reject non-C++ input early: feeding e.g. a .md file to g++ gets passed through to
+rem the linker, which fails with a confusing "file format not recognized" instead of
+rem telling you the real cause (wrong file for the VS Code ${file} task variable).
+for %%F in ("%SRC%") do set "EXT=%%~xF"
+set "OKEXT="
+if /i "%EXT%"==".cpp" set "OKEXT=1"
+if /i "%EXT%"==".cc" set "OKEXT=1"
+if /i "%EXT%"==".cxx" set "OKEXT=1"
+if not defined OKEXT (
+  echo Error: not a C++ source file ^(expected .cpp^): %SRC%
+  exit /b 1
+)
 if not exist "%ROOT%\build" mkdir "%ROOT%\build"
 
 rem Project-local runtime: sync MSYS2 runtime DLLs into build\.

@@ -20,6 +20,15 @@ if [ ! -f "$SRC" ]; then
   echo "错误 Error: 找不到源文件 $SRC" >&2
   exit 1
 fi
+# 提前拒绝非 C++ 输入：把 .md 之类喂给 g++ 会被甩到链接器，
+# 报出「file format not recognized」这种完全指错方向的错（VS Code ${file} 选中了别的标签页）。
+case "$SRC" in
+  *.cpp | *.cc | *.cxx) ;;
+  *)
+    echo "错误 Error: 不是 C++ 源文件（需要 .cpp）: $SRC" >&2
+    exit 1
+    ;;
+esac
 shift
 
 mkdir -p "$PROJECT_ROOT/build"
