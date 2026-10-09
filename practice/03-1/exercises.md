@@ -150,11 +150,15 @@
 
 | 项目 | ✅ 熟练 | 🔶 基本掌握 | ❌ 薄弱 |
 | --- | --- | --- | --- |
-| unordered_map / unordered_set（哈希，平均 O(1)、无序） | | | |
-| priority_queue（默认最大堆 / `greater` 最小堆 / Top-K） | | | |
-| stack / queue（LIFO / FIFO、front/back/top） | | | |
-| deque（双端操作、与 vector 对比） | | | |
-| 自定义比较器方向（priority_queue 的 comp 语义） | | | |
-| 综合应用与容器选型升级 | | | |
+| unordered_map / unordered_set（哈希，平均 O(1)、无序） | ✅ | | |
+| priority_queue（默认最大堆 / `greater` 最小堆 / Top-K） | ✅ | | |
+| stack / queue（LIFO / FIFO、front/back/top） | ✅ | | |
+| deque（双端操作、与 vector 对比） | ✅ | | |
+| 自定义比较器方向（priority_queue 的 comp 语义） | ✅ | | |
+| 综合应用与容器选型升级 | ✅ | | |
 
-填完把结果发给 Claude，全 ✅ → 收官 M3-1 → 进 M4-1 面向对象核心。
+> 填表日期 2026-10-09，全部 ✅ 熟练 → **M3-1 收官**，进 M4-1 面向对象核心。
+>
+> 第 5 项「自定义比较器方向」在填表时做过一轮口头澄清：`comp(a,b) == true` 表示 a ≺ b；
+> `sort` 中 a 排在 b 前面，`priority_queue` 中 a 比 b 晚出队。同时钉死了
+> **`priority_queue` 不是 FIFO**（底层默认是 `vector` + 堆，出队只按优先级，与插入顺序无关）。

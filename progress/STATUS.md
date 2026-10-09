@@ -4,21 +4,22 @@
 > 配套：`ROADMAP.md`（全局路线）/ `progress/PROGRESS.md`（历史日志）。
 > 三处保持同步，本文件是「现在进行到哪」的单一答案。
 
-## 当前状态 Current Status（截至 2026-09-07）
+## 当前状态 Current Status（截至 2026-10-09）
 
 **正在做 In progress：**
 
-- **M3-1 高频容器（M3 收尾扩展）** —— 内容生成 ✅（2026-08-14）；A 区热身练习 1-4 review 通过（2026-08-17）；B 区练习 05 review 通过（2026-08-19）；06 括号匹配 review 通过（2026-09-07）；07 约瑟夫环 review 通过（2026-09-07）；08 前 K 大 review 通过（2026-09-08）；**09 deque 回文 review 通过（2026-09-08）**：编译 0 警告、10 组用例与格式检查全通过；待 C 区综合题 10 与自评。
-- **M6 · gdb 调试入门** —— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位（可随时并行练）。
+- （无 —— M3-1 已收官，等待开启 M4-1）
+- **M6 · gdb 调试入门**（可选并行）—— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位。
 
 **下一步 Next：**
 
-1. **完成 M3-1 C 区综合练习 10**（前 K 高频词堆解法），回来 review 后填写自评表，收官 M3-1。
+1. **开启 M4-1 面向对象核心**（继承、多态、虚函数）—— 生成 `docs/04-1-*.md` + `examples/04-1/` + `practice/04-1/`。
 2. M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
 
 **已完成 Done：**
 
-- **M3-1 高频容器 —— 内容生成 ✅（2026-08-14）**：`docs/03-1-high-frequency-containers.md`（unordered_map/set 哈希平均 O(1)、priority_queue 堆默认最大堆/greater 最小堆/Top-K 最小堆模式、stack/queue 适配器 LIFO/FIFO、deque 两端 O(1)；复杂度速查升级选型 + 9 条易错点）+ `examples/03-1/` 4 示例（编译 0 警告 + 运行验证 + format 全过）+ `practice/03-1/exercises.md` 10 练习（A 热身 ①-④ / B 核心 ⑤ unordered_set 去重存在性 ⑥ 括号匹配 LeetCode20 ⑦ 约瑟夫环 queue ⑧ Top-K 最小堆 ⑨ deque 回文 / C 综合 ⑩ 前 K 高频词堆解法）+ 10 参考答案（编译 0 警告 + 用例全对 + format 全过）。**待用户练习**。
+- **M3-1 高频容器 —— 收官 ✅（2026-10-09）**：A 区 1-4、B 区 05-09、C 区综合题 10（前 K 高频词堆解法）全部 review 通过；自评表 6 项全 ✅ 熟练。练习 10 编译 0 警告、10 组用例全对（含并列决胜与边界）、format 通过，`Compare` 比较器一次写对。填表时口头澄清了 `priority_queue` 的 comp 语义与「它不是 FIFO」两个易混点（详见 PROGRESS 2026-10-09 日志）。
+- **M3-1 高频容器 —— 内容生成 ✅（2026-08-14）**：`docs/03-1-high-frequency-containers.md`（unordered_map/set 哈希平均 O(1)、priority_queue 堆默认最大堆/greater 最小堆/Top-K 最小堆模式、stack/queue 适配器 LIFO/FIFO、deque 两端 O(1)；复杂度速查升级选型 + 9 条易错点）+ `examples/03-1/` 4 示例（编译 0 警告 + 运行验证 + format 全过）+ `practice/03-1/exercises.md` 10 练习（A 热身 1-4 / B 核心 5 unordered_set 去重存在性 6 括号匹配 LeetCode20 7 约瑟夫环 queue 8 Top-K 最小堆 9 deque 回文 / C 综合 10 前 K 高频词堆解法）+ 10 参考答案（编译 0 警告 + 用例全对 + format 全过）。
 - **M3 · STL 容器与算法 —— 完成 ✅（2026-08-14）**：练习 1-10 全部 review 通过 + 自评表全 ✅（vector/string/map-set/迭代器/algorithm/综合选型 6 项全熟练）。收官题练习 10 容器选型：一轮返工补齐——B 复杂度（map 插入 O(log n) 非 O(1)）、C 均摊 O(1) + 扩容 O(n)、D 三操作（`+=`/find+npos/getline）、E 核心坑（`std::binary_search` 要随机访问迭代器，set 迭代器不满足 → vector+sort+unique 组合）。**模块收官，下一站 M3-1 高频容器**。
 - **M3 练习 9 review 通过 ✅（2026-08-14）**：D 区综合 ⑨ 词频 Top-K——getline+istringstream 分词、map 计数、vector<pair> 收集、sort+lambda 复合比较（次数降序、并列字典序），5 用例全对（含 6 词只打前 3、并列字典序、不足 3 词全打边界）。两轮返工：① 打印全部词 → 限前 3；② `std::min(output.size(), 3)` 编译失败（模板推导不做隐式转换，`size_t` vs `int` 不匹配）→ 改 `std::min<size_t>` 显式指定类型，顺带掌握 size_t/int 混用坑。编译 0 警告 + format 全过。M3 仅剩 ⑩。
 - **M3 练习 7-8 review 通过 ✅（2026-08-13）**：C 区收尾——⑦ 迭代器专项（正向/反向/distance/end 哨兵，补注释答案 + 通用性要点 `!=` 全迭代器通用），⑧ algorithm 专项（sort/accumulate/min-max/count/reverse 原地操作 + target 输入返工，`<numeric>` 头文件正确）。0 警告 + format 全过；练习 7 自留问题（reserve vs `v(n)`）已解答。M3 剩 D 区 9-10。

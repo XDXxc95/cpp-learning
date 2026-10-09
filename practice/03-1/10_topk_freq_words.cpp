@@ -24,7 +24,41 @@
 #include <utility>
 #include <vector>
 
+struct Compare {
+  bool operator()(const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+    if (a.second != b.second) {
+      return a.second < b.second;
+    }
+    return a.first > b.first;
+  }
+};
+
 int main() {
-  // TODO: 你的实现
+
+  std::string line;
+  std::getline(std::cin, line);
+
+  std::unordered_map<std::string, int> freq;
+  std::istringstream iss(line);
+  std::string word;
+  while (iss >> word) {
+    freq[word]++;
+  }
+
+  //
+  std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>,
+                      Compare>
+      pq;
+  for (const auto& kv : freq) {
+    pq.push(kv);
+  }
+
+  int shown = 0;
+  while (!pq.empty() && shown < 3) {
+    std::cout << pq.top().first << " " << pq.top().second << "\n";
+    pq.pop();
+    shown++;
+  }
+
   return 0;
 }

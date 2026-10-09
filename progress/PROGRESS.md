@@ -4,6 +4,19 @@
 
 ## 会话记录 Sessions
 
+### 2026-10-09 · M3-1 练习 10 review 通过 + 模块收官
+
+- **需求**：用户完成 C 区综合练习 10（前 K 高频词堆解法）后请求 review；填自评表收官 M3-1。
+- **实现**：`unordered_map<string,int>` 统计词频（`getline` + `istringstream` 分词），迭代器直接把 `pair` 推入 `priority_queue`（省掉题目建议的中间 `vector`），自定义 `Compare` 按「次数降序、并列字典序升序」取前 3。比较器一次写对（两个分支方向均正确，且满足严格弱序）。
+- **验证**：`tools/build.sh` 编译通过，`-Wall -Wextra` 0 警告；`tools/format.sh --check` 通过；10 组用例全对 —— 题面示例、并列次数字典序决胜、四词全并列取前 3、**并列落在第 3/4 名边界**（`d c b a d c b a` → `a 2/b 2/c 2`，无 `d`）、第 4 名落选、不足 3 词、单词、空行、大小写敏感、多空格分词。
+- **概念澄清（本次会话重点）**：围绕 `priority_queue` 的 comp 语义讨论了两轮 ——
+  1. `comp(a,b) == true` 表示 a ≺ b：`sort` 里 a 排在 b **前**，`priority_queue` 里 a 比 b **晚出队**；两者约定相反，同一 `less<T>` 下 sort 出升序、pq 出大顶堆。写了 `build/_cmp_demo.cpp` 实测验证（同一 `Compare` 在 sort 与 pq 下输出完全颠倒）。
+  2. 用户最初误把 `priority_queue` 归为 FIFO，已纠正：它是**容器适配器**但底层默认 `vector` + 堆，出队只按优先级、与插入顺序无关（实测入堆 `3,1,2` 弹出 `3,2,1`）。
+- **可改进点（未强制返工）**：`main()` 内遗留一行空 `//` 注释、`int main() {` 后多一空行；练习 10 把全部 n 个词入堆是 O(n log n)，与 sort 版持平 —— 真正的 Top-K 收益要用大小为 k 的最小堆做到 O(n log k)，已提示用户自行尝试（LeetCode 347 考点）。
+- **结论**：C 区练习 10 review 通过 ✅。自评表 6 项（unordered_map/set、priority_queue、stack/queue、deque、自定义比较器方向、综合选型）**全部 ✅ 熟练**。
+- **附带修复**：`tools/build.*` / `tools/compile.*` 增加非 `.cpp` 输入的明确报错（此前 VS Code `${file}` 选中 `exercises.md` 时，文件被甩给链接器报出误导性的 `file format not recognized`）；`.vscode/tasks.json` 恢复为项目原版 3 任务（VS Code 调试器曾自动追加 `g++.exe build active file` 并抢走 `isDefault`，会绕开项目脚本、把 exe 落在源码目录）。
+- **下一步**：**M3-1 收官** → 开启 M4-1 面向对象核心（继承、多态、虚函数）。M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
+
 ### 2026-09-08 · M3-1 练习 09 review 通过
 
 - **需求**：用户完成练习 09 `deque` 回文检查后请求 review。
