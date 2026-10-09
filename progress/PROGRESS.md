@@ -4,6 +4,18 @@
 
 ## 会话记录 Sessions
 
+### 2026-10-09 · M4-1 面向对象核心 —— 内容生成
+
+- **需求**：M3-1 收官后，用户说「下一步」，开启 M4-1 面向对象核心（继承、多态、虚函数）。
+- **交付**：
+  - `docs/04-1-oop-core.md` —— 6 节正文（继承基础与访问控制 / virtual 与动态绑定 / 纯虚函数与抽象类 / 虚析构 / 对象切片 / 一张图收口）+ 代码示例表 + 9 条易错点 + 8 条自测题。含 public/protected/private 的**两种**矩阵（成员可见性 vs 三种继承方式），及 vptr 代价说明。
+  - `examples/04-1/` 4 示例：`01_inheritance_basic`（访问控制 + 三层继承链构造析构顺序打印）、`02_virtual_polymorphism`（同一调用加/不加 virtual 的对照，指针/引用/容器三种调用形式）、`03_abstract_interface`（非虚析构 vs 虚析构的运行时对照 + 抽象类接口）、`04_slicing_and_override`（按值 vs 按引用、`vector<Base>` vs `vector<Base*>`、final）。
+  - `practice/04-1/exercises.md` + 10 骨架 + 10 参考答案，A 热身 1-4 / B 核心 5-9 / C 综合 10，覆盖继承、访问控制、构造析构顺序、virtual 覆盖、抽象类、虚析构泄漏、override/final、对象切片、vptr 代价、多态+指针容器综合。
+- **验证**：4 示例与 10 参考答案全部 `tools/build.sh` 编译 **0 警告**、`tools/format.sh --check` 全过；10 份答案逐个运行核对输出（含 09 的 `sizeof(Plain)=8 / sizeof(Poly)=16 / 差值 8` 与 10 的 `total area = 30.5664 / largest = circle` + 三行 `[dtor]`）；10 个骨架确认可直接编译（用户可即填即跑）。
+- **过程中修正的错误**：初稿在文档里写「基类非虚析构 + 通过基类指针 delete **不会**有警告」——实测 GCC 会给出 `-Wdelete-non-virtual-dtor`（`-Wall` 即开启）。已改为准确说法：**直接** delete 会告警、别压掉，但间接场景（智能指针/类型擦除）未必报，不能拿警告兜底；同时给示例 03 与答案 06 加了带说明的 `#pragma GCC diagnostic ignored` 以保持 0 警告，并在注释里点明「真实项目应改基类析构为 virtual」。
+- **结论**：M4-1 内容生成完成 ✅，**待用户练习**。
+- **下一步**：用户做 `practice/04-1/` 10 道练习 → 回来 review → 自评表 7 项 → 收官 M4-1 → 进 M4-2 拷贝控制。M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
+
 ### 2026-10-09 · M3-1 练习 10 review 通过 + 模块收官
 
 - **需求**：用户完成 C 区综合练习 10（前 K 高频词堆解法）后请求 review；填自评表收官 M3-1。

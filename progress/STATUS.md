@@ -8,16 +8,17 @@
 
 **正在做 In progress：**
 
-- （无 —— M3-1 已收官，等待开启 M4-1）
+- **M4-1 面向对象核心** —— 内容生成 ✅（2026-10-09）；**待用户练习 10 道题**（A 区 1-4 热身 / B 区 5-9 核心 / C 区 10 综合），完成后 review + 自评收官。
 - **M6 · gdb 调试入门**（可选并行）—— 文档/示例/练习已生成，用户已在 VS Code 可视化调试走通断点/单步；`01_debug_me.cpp` 越界 bug 待独立定位。
 
 **下一步 Next：**
 
-1. **开启 M4-1 面向对象核心**（继承、多态、虚函数）—— 生成 `docs/04-1-*.md` + `examples/04-1/` + `practice/04-1/`。
+1. **做 M4-1 的 10 道练习**（`practice/04-1/`，先自己写再对照 `solutions/`），回来 review。
 2. M6 gdb 的 `01_debug_me.cpp` 越界 bug 可随时并行练。
 
 **已完成 Done：**
 
+- **M4-1 面向对象核心 —— 内容生成 ✅（2026-10-09）**：`docs/04-1-oop-core.md`（继承与访问控制 / public-protected-private 可见性矩阵与三种继承方式 / 构造析构顺序 / virtual 静态绑定 vs 动态绑定 / 多态三要素 / override 与 final / 纯虚函数与抽象类 / 虚析构与 `-Wdelete-non-virtual-dtor` / 对象切片 / vptr 代价 / 9 条易错点）+ `examples/04-1/` 4 示例（编译 0 警告 + 运行验证 + format 全过）+ `practice/04-1/exercises.md` 10 练习（A 热身 1 继承访问控制 2 构造析构顺序 3 virtual 覆盖 4 抽象类 / B 核心 5 多态求总面积 6 虚析构与泄漏 7 override 与 final 8 对象切片 9 虚函数对象大小代价 / C 综合 10 简易图形清单系统）+ 10 骨架 + 10 参考答案（编译 0 警告 + 运行输出核对 + format 全过）。**待用户练习**。
 - **M3-1 高频容器 —— 收官 ✅（2026-10-09）**：A 区 1-4、B 区 05-09、C 区综合题 10（前 K 高频词堆解法）全部 review 通过；自评表 6 项全 ✅ 熟练。练习 10 编译 0 警告、10 组用例全对（含并列决胜与边界）、format 通过，`Compare` 比较器一次写对。填表时口头澄清了 `priority_queue` 的 comp 语义与「它不是 FIFO」两个易混点（详见 PROGRESS 2026-10-09 日志）。
 - **M3-1 高频容器 —— 内容生成 ✅（2026-08-14）**：`docs/03-1-high-frequency-containers.md`（unordered_map/set 哈希平均 O(1)、priority_queue 堆默认最大堆/greater 最小堆/Top-K 最小堆模式、stack/queue 适配器 LIFO/FIFO、deque 两端 O(1)；复杂度速查升级选型 + 9 条易错点）+ `examples/03-1/` 4 示例（编译 0 警告 + 运行验证 + format 全过）+ `practice/03-1/exercises.md` 10 练习（A 热身 1-4 / B 核心 5 unordered_set 去重存在性 6 括号匹配 LeetCode20 7 约瑟夫环 queue 8 Top-K 最小堆 9 deque 回文 / C 综合 10 前 K 高频词堆解法）+ 10 参考答案（编译 0 警告 + 用例全对 + format 全过）。
 - **M3 · STL 容器与算法 —— 完成 ✅（2026-08-14）**：练习 1-10 全部 review 通过 + 自评表全 ✅（vector/string/map-set/迭代器/algorithm/综合选型 6 项全熟练）。收官题练习 10 容器选型：一轮返工补齐——B 复杂度（map 插入 O(log n) 非 O(1)）、C 均摊 O(1) + 扩容 O(n)、D 三操作（`+=`/find+npos/getline）、E 核心坑（`std::binary_search` 要随机访问迭代器，set 迭代器不满足 → vector+sort+unique 组合）。**模块收官，下一站 M3-1 高频容器**。
